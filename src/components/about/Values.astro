@@ -3,29 +3,29 @@ const values = [
   [
     {
       ref: '01',
-      name: 'Excellence',
+      name: 'Expert Sourcing',
       description:
-        'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
+        'We source our watches from reputable suppliers and verify their authenticity through industry standards.',
     },
     {
       ref: '02',
-      name: 'Innovation',
+      name: 'Thorough Inspection',
       description:
-        'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
+        'Each watch undergoes a meticulous inspection to confirm:\n- Authentic serial and model numbers\n- Quality of craftsmanship\n- Functionality',
     },
   ],
   [
     {
       ref: '03',
-      name: 'Teamwork',
+      name: 'Documentation',
       description:
-        'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
+        'We provide comprehensive documentation, including:\n- Original box and papers (if available)\n- Proof of authenticity',
     },
     {
       ref: '04',
-      name: 'Respect',
+      name: 'Dedicated Support',
       description:
-        'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
+        'Our customer support team is here to assist you with any questions about your watch.\n\nWith Clocked In, you can trust that you’re investing in a genuine Watch. If you have any questions, please reach out. Thank you for choosing us!',
     },
   ],
 ];
@@ -33,9 +33,31 @@ const values = [
 
 <section class="py-16 sm:py-20">
   <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-    <div class="flex flex-col gap-8 lg:gap-12">
-      <h2 class="text-3xl font-medium tracking-tight sm:text-4xl">Our Values</h2>
-      <div class="grid gap-8 lg:grid-cols-2">
+      <!-- description -->
+      <div class="flex flex-col gap-10">
+        <div class="space-y-8 sm:space-y-12">
+          <h2 class="text-3xl font-medium tracking-tight sm:text-4xl">
+            At Clocked In, we ensure that every Watch we sell is 100% genuine. Our commitment to authenticity includes:
+          </h2>
+        </div>
+    </div>
+  </div>
+<div ="py-16 sm:py-20">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center">
+      <!-- Image on the side -->
+      <div class="w-full lg:w-1/2">
+        <img
+          class="mx-auto h-auto w-full max-w-xl rounded-3xl"
+          width="576"
+          height="864"
+          src="/assets/Watches02.webp"
+          alt="Our experts working together"
+        />
+      </div>
+
+      <!-- Cards on the side -->
+      <div class="w-full lg:w-1/2 grid gap-8 lg:grid-cols-2">
         {
           values.map((column, index) => (
             <div class:list={['space-y-8', index === 1 && 'lg:mt-16']}>

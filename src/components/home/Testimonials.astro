@@ -1,25 +1,22 @@
 ---
 const testimonials = [
   {
-    name: 'Rebecca Hayes',
-    description: 'Designer',
-    image: '/assets/testimonial-1.webp',
+    name: 'B C',
+    image: '/assets/review01.webp',
     message:
-      '“Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo expedita voluptas culpa sapiente alias molestiae. Numquam corrupti in laborum sed rerum et corporis.”',
+      '“I’ve purchased three watches from Clocked In over the the past few months. Quick service and very reasonable prices. Five stars!”',
   },
   {
-    name: 'Rosa Spencer',
-    description: 'Team Leader',
-    image: '/assets/testimonial-2.webp',
+    name: 'The Timeless Collector',
+    image: '/assets/review02.webp',
     message:
-      '“Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo expedita voluptas culpa sapiente alias molestiae. Numquam corrupti in laborum sed rerum et corporis.”',
+      '“Two weeks ago I bought an AirKing from them. The watch arrived in better condition than advertised, one day earlier than promised, with a small box of Tolberone chocolate inside.”',
   },
   {
-    name: 'Christina Upton',
-    description: 'Manager',
-    image: '/assets/testimonial-3.webp',
+    name: 'Mo Alboinen',
+    image: '/assets/review03.webp',
     message:
-      '“Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo expedita voluptas culpa sapiente alias molestiae. Numquam corrupti in laborum sed rerum et corporis.”',
+      '“The BEST in the biz! Ive purchased many watches from Mason and his team, and the experience is always amazing.”',
   },
 ];
 ---
@@ -28,7 +25,7 @@ const testimonials = [
   <div class="v mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8">
     <div class="flex flex-col items-center gap-12 lg:gap-20">
       <h2 class="mx-auto max-w-xl text-center text-3xl font-medium tracking-tight sm:text-4xl">
-        Trusted by the largest companies in the world
+        Reviews
       </h2>
       <div
         class="divide-primary-900/10 dark:divide-primary-300/10 grid divide-y lg:grid-cols-3 lg:divide-x lg:divide-y-0"
@@ -37,7 +34,7 @@ const testimonials = [
           testimonials.map((testimonial) => (
             <figure class="mx-auto flex max-w-lg flex-col items-center gap-6 py-8 lg:px-8 lg:py-0">
               <div class="flex flex-row gap-2">
-                {[...Array(3)].map(() => (
+                {[...Array(5)].map(() => (
                   <svg
                     class="text-primary-600 dark:text-primary-400 h-6 w-6"
                     xmlns="http://www.w3.org/2000/svg"
@@ -57,7 +54,6 @@ const testimonials = [
                 <div class="text-center">
                   <div class="text-base font-medium">{testimonial.name}</div>
                   <div class="text-primary-950/70 dark:text-primary-200/70 text-sm">
-                    {testimonial.description}
                   </div>
                 </div>
               </figcaption>

@@ -1,36 +1,36 @@
 ---
 const pricing = [
   {
-    name: 'Basic',
-    description: 'For development, staging, and small production projects.',
-    periodicity: '/month',
-    price: '$10',
-    action: 'Buy Now',
-    features: ['5 Seats', '1,000 Projects', 'Lifetime access', 'Community Support'],
-  },
-  {
-    name: 'Pro',
-    description: 'For high-scale and mission critical projects.',
-    isFlagged: true,
-    periodicity: '/month',
-    price: '$25',
-    action: 'Buy Now',
-    features: ['10 Seats', '10,000 Projects', 'Lifetime access', 'Email Support', 'Free updates'],
-  },
-  {
-    name: 'Team',
-    description: 'For teams with more security, support, and performance needs.',
+    name: 'Watch01',
+    description: 'Lorem Ipsum',
     periodicity: '',
-    price: 'Custom',
-    action: 'Buy Now',
+    price: '$0000',
+    action: 'Inquire',
+    features: ['Lorem Ipsum', 'Lorem Ipsum', 'Lorem Ipsum', 'Lorem Ipsum', 'Lorem Ipsum'],
+    image: './assets/watch01.jpg'
+  },
+  {
+    name: 'Watch02',
+    description: 'Lorem Ipsum',
+    isFlagged: true,
+    periodicity: '',
+    price: '$0000',
+    action: 'Inquire',
+    features: ['Lorem Ipsum', 'Lorem Ipsum', 'Lorem Ipsum', 'Lorem Ipsum', 'Lorem Ipsum'],
+    image: './assets/watch02.jpg'
+  },
+  {
+    name: 'Watch03',
+    description: 'Lorem Ipsum',
+    periodicity: '',
+    price: '$0000',
+    action: 'Inquire',
     features: [
-      'Unlimited Seats',
-      'Unlimited Projects',
-      'Lifetime access',
-      'Email and Chat Support',
-      'High-Performance',
-      'Free updates',
+      'Lorem Ipsum',
+      'Lorem Ipsum',
+      'Lorem Ipsum',
     ],
+    image: './assets/watch03.jpg'
   },
 ];
 ---
@@ -48,6 +48,7 @@ const pricing = [
           >
             <div class="flex-1">
               <h2 class="text-xl font-medium">{item.name}</h2>
+              <img src={item.image} alt={item.name} class="w-full h-auto rounded-lg" />
               <p class="mt-4 flex items-baseline">
                 <span class="text-4xl font-medium tracking-tight">{item.price}</span>
                 <span class="text-primary-950/70 dark:text-primary-200/70 ml-1 text-sm font-medium">
@@ -74,10 +75,10 @@ const pricing = [
               </ul>
             </div>
             <a
-              href="#"
+              href="/contact"
               class="bg-primary-600 dark:bg-primary-400 hover:bg-primary-700 dark:hover:bg-primary-300 focus-visible:outline-primary-600 dark:focus-visible:outline-primary-400 dark:text-primary-950 inline-flex w-full items-center justify-center rounded-full border border-transparent px-5 py-3 text-base font-medium text-white transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
             >
-              Buy now
+              Inquire
             </a>
           </div>
         ))

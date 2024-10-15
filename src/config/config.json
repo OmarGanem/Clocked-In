@@ -1,0 +1,15 @@
+{
+    "settings": {
+      "pagination": 4,
+      "summary_length": 200,
+      "blog_folder": "blog"
+    },
+  
+    "params": {
+      "contact_form_action": "https://formspree.io/f/xblrnekn",
+      "tag_manager_id": "",
+      "footer_content": "",
+      "copyright": "Designed and Developed By Diversitas.com"
+    }
+  }
+
