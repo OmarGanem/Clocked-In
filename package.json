@@ -13,6 +13,7 @@
     "@alpinejs/collapse": "3.12.3",
     "@astrojs/tailwind": "4.0.0",
     "@fontsource/inter": "5.0.8",
+    "@types/swiper": "^6.0.0",
     "alpinejs": "3.12.3",
     "astro": "2.10.13",
     "astro-compress": "2.0.14",
