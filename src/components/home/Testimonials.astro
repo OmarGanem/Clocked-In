@@ -24,7 +24,7 @@ const testimonials = [
 <section class="py-16 sm:py-20">
   <div class="v mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8">
     <div class="flex flex-col items-center gap-12 lg:gap-20">
-      <h2 class="mx-auto max-w-xl text-center text-3xl font-medium tracking-tight sm:text-4xl">
+      <h2 class="mx-auto max-w-xl text-center text-3xl font-medium tracking-tight sm:text-4xl text-black">
         Reviews
       </h2>
       <div
@@ -46,15 +46,13 @@ const testimonials = [
                   </svg>
                 ))}
               </div>
-              <blockquote class="text-primary-950/70 dark:text-primary-200/70 text-center text-lg italic leading-loose">
+              <blockquote class="text-black text-center text-lg italic leading-loose">
                 <p>{testimonial.message}</p>
               </blockquote>
               <figcaption class="flex flex-col gap-4">
                 <img class="mx-auto h-8 w-8 rounded-full" src={testimonial.image} alt="" />
                 <div class="text-center">
-                  <div class="text-base font-medium">{testimonial.name}</div>
-                  <div class="text-primary-950/70 dark:text-primary-200/70 text-sm">
-                  </div>
+                  <div class="text-base font-medium text-black">{testimonial.name}</div>
                 </div>
               </figcaption>
             </figure>

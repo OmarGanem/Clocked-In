@@ -5,24 +5,28 @@ const products = [
     title: "Rolex GMT Master II ‘Pepsi’",
     description: "The GMT-Master II ref. 126710BLRO features a 40mm Oystersteel (Rolex's branded 904L stainless steel alloy) topped with a blue and red Cerachrom bezel. Its case features slightly slimmed-down lugs compared to the 11671x generation of GMT-Master II watches.",
     collection: "Shop Rolex",
-    href: "/shop-rolex", // Unique link for Rolex
+    href: "/shop-rolex",
   },
   {
     image: "./assets/watch07.jpg",
     title: "Patek Philippe Aquanaut",
     description: "When launched in 1997, the Aquanaut created a sensation. It was young, modern and unexpected. Its case was a rounded octagon, inspired by that of the Nautilus. And it sported a “Tropical” strap, made of a new composite material ultra-resistant to wear, salt water and UV radiation.",
     collection: "Shop Patek Philippe",
-    href: "/shop-patek-philippe", // Unique link for Patek Philippe
+    href: "/shop-patek-philippe",
   },
   {
     image: "./assets/watch08.jpg",
     title: "Panerai Submersible",
     description: "Panerai Submersible watches have been made with divers in mind. Each piece in this collection offers water-resistant functionality to 300 meters and materials designed to withstand the impact of high pressure below the waves",
     collection: "Shop Panerai",
-    href: "/shop-panerai", // Unique link for Panerai
+    href: "/shop-panerai",
   },
 ];
 ---
+
+<head>
+  <link rel="stylesheet" href="/src/components/home/global.css" />
+</head>
 
 <section class="whats-new-section">
   <h2>What's New</h2>
@@ -30,108 +34,106 @@ const products = [
     {products.map((product, index) => (
       <div class={`item-card-wrapper ${index % 2 === 1 ? 'reverse-layout' : ''}`}>
         <div class="item-card">
-          <a href="#">
+          <a href={product.href}>
             <img class="card-image" src={product.image} alt={product.title} />
           </a>
         </div>
         <div class="card-info">
           <p class="product-title">{product.title}</p>
           <p class="product-description">{product.description}</p>
-          <a href="{product.href}" class="shop-now">{product.collection} </a>
+          <a href={product.href} class="shop-now">{product.collection}</a>
         </div>
       </div>
     ))}
   </div>
-  
 </section>
 
 <style>
 .whats-new-section {
-color: #fff;
-padding: 40px 0;
-text-align: center;
+  color: #000; /* Changed to black for contrast */
+  padding: 40px 0;
+  text-align: center;
 }
 
 .whats-new-section h2 {
-font-size: 2.5rem;
-font-weight: bold;
-margin-bottom: 40px;
-color: #f1c40f; /* Accent color */
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 40px;
+  color: #f1c40f; /* Accent color */
 }
 
-/* Organize items in a row (image left, text right) */
 .new-items {
-display: flex;
-flex-direction: column;
-gap: 40px; /* Space between cards */
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 }
 
 .item-card-wrapper {
-display: flex;
-flex-direction: row; /* Default is image left, text right */
-align-items: center;
-justify-content: center;
-gap: 40px; /* Space between image and text */
-width: 100%;
-padding: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  width: 100%;
+  padding: 20px;
 }
 
-/* Reverse layout for alternating rows (image right, text left) */
 .reverse-layout {
-flex-direction: row-reverse;
+  flex-direction: row-reverse;
 }
 
-/* Card container for the image */
 .item-card {
-flex: 1;
-max-width: 50%; /* Limit the image to take up half the space */
-overflow: hidden;
-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Subtle shadow */
-transition: transform 0.3s ease, box-shadow 0.3s ease;
+  flex: 1;
+  max-width: 50%;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .item-card:hover {
-transform: translateY(-10px); /* Lift on hover */
-box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Darker shadow on hover */
+  transform: translateY(-10px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
-/* Ensure image fills the card */
 .card-image {
-width: 100%;
-height: 100%;
-object-fit: cover; /* Ensures the image covers the entire card */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-/* Text placed next to the image */
 .card-info {
-flex: 1;
-max-width: 50%; /* Limit the text to take up half the space */
-text-align: left;
-padding: 20px;
+  flex: 1;
+  max-width: 50%;
+  text-align: left;
+  padding: 20px;
 }
 
 .product-title {
-font-size: 1.5rem;
-font-weight: bold;
-color: #fff;
-margin-bottom: 10px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #000; /* Changed to black */
+  margin-bottom: 10px;
+}
+
+.product-description {
+  color: #000; /* Ensures description text is black */
 }
 
 .product-price {
-font-size: 1.2rem;
-font-weight: bold;
-color: #f1c40f;
-margin-bottom: 10px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #f1c40f;
+  margin-bottom: 10px;
 }
 
 .shop-now {
-text-decoration: none;
-color: #f1c40f;
-font-size: 1rem;
-font-weight: bold;
+  text-decoration: none;
+  color: #f1c40f;
+  font-size: 1rem;
+  font-weight: bold;
 }
 
 .shop-now:hover {
-text-decoration: underline;
+  text-decoration: underline;
 }
 </style>

@@ -14,7 +14,7 @@ const { description, title } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang="en" x-cloak x-data :class="{ 'dark': $store.theme.isDark }">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
@@ -28,45 +28,30 @@ const { description, title } = Astro.props;
     <ViewTransitions />
   </head>
   <body
-    class="bg-primary-50 text-primary-950 dark:bg-primary-950 dark:text-primary-200 antialiased transition"
+    class="bg-primary-50 text-primary-950 antialiased transition"
   >
     <Header />
     <main>
       <slot />
     </main>
     <Footer />
+
     <style is:global>
-      [x-cloak] {
-        display: none !important;
+      body {
+        background-repeat: repeat;
+        background-attachment: scroll;
+        background-size: auto;
+        background-color: #000000;
       }
     </style>
+
     <script>
       import Alpine from 'alpinejs';
       import collapse from '@alpinejs/collapse';
 
       Alpine.plugin(collapse);
-
-      Alpine.store('theme', {
-        init() {
-          this.isDark = (() => {
-            if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-              return localStorage.getItem('theme') === 'dark';
-            }
-            if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-              return true;
-            }
-            return false;
-          })();
-        },
-
-        isDark: false,
-
-        toggle() {
-          this.isDark = !this.isDark;
-          localStorage.setItem('theme', this.isDark ? 'dark' : 'light');
-        },
-      });
-
+      
+      // No theme-related logic required, removed dark mode references
       window.Alpine = Alpine;
       Alpine.start();
     </script>

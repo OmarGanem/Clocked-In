@@ -1,0 +1,21 @@
+/* global.css */
+html, body {
+    color: #000; /* Set global text color to black */
+    font-family: 'Poppins', sans-serif; /* Ensure font consistency globally */
+    background-color: #fff; /* Global background color */
+  }
+  
+  /* You can also set global styles for specific text elements */
+  h1, h2, h3, h4, h5, h6, p, a, span {
+    color: inherit; /* Inherit the color defined for body */
+  }
+  
+  /* Additional global typography adjustments */
+  a {
+    text-decoration: none;
+    color: #f1c40f; /* Global link color */
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
