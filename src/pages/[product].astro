@@ -1,0 +1,51 @@
+---
+import watchesData from "../../products.json";
+
+// Define a type for a Product
+interface Product {
+  productName: string;
+  category: string;
+  price: string;
+  year?: string;
+  image: string;
+}
+
+// Slugify function to create slugs from product names
+const slugify = (title: string): string => {
+  return title
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')  // Replace non-alphanumeric characters with hyphens
+    .replace(/(^-|-$)/g, '');     // Remove leading or trailing hyphens
+};
+
+// Implement getStaticPaths to generate paths based on product names
+export async function getStaticPaths() {
+  const products: Product[] = watchesData.products;
+
+  return products.map((product) => ({
+    params: { product: slugify(product.productName) },  // Slugify the product name
+  }));
+}
+
+// Access the dynamic slug (product name) from URL
+const { product } = Astro.params;
+
+// Find the selected product based on the slug
+const selectedProduct = watchesData.products.find(
+  (p) => slugify(p.productName) === product
+);
+
+if (!selectedProduct) {
+  throw new Error(`Product not found: ${product}`);
+}
+---
+
+<section class="flex justify-center p-4 flex-col">
+  <h1 class="text-xl font-bold">{selectedProduct.productName}</h1>
+  <p class="text-gray-600">Category: {selectedProduct.category}</p>
+  <p class="text-gray-600">Price: ${selectedProduct.price}</p>
+  {selectedProduct.year && (
+    <p class="text-gray-600">Year: {selectedProduct.year}</p>
+  )}
+  <img src={selectedProduct.image} alt={selectedProduct.productName} class="mt-4 w-full h-auto"/>
+</section>

@@ -1,0 +1,26 @@
+{
+    "products": [
+      {
+        "productName": "Rolex GMT Master II ‘Pepsi’",
+        "category": "Rolex",
+        "price": "100",
+        "year": "2020",
+        "image": "./assets/watch04.jpg"
+      },
+      {
+        "productName": "Patek Philippe Aquanaut 5167/1A",
+        "category": "Patek Philippe",
+        "price": "200",
+        "year": "2019",
+        "image": "./assets/watch07.jpg"
+      },
+      {
+        "productName": "Panerai Submersible",
+        "category": "Panerai",
+        "price": "150",
+        "year": "2018",
+        "image": "./assets/watch08.jpg"
+      }
+    ]
+  }
+  
