@@ -1,48 +1,146 @@
 ---
+const products = [
+  {
+    image: "./assets/watch04.jpg",
+    title: "Rolex GMT Master II ‘Pepsi’",
+    description: "The GMT-Master II ref. 126710BLRO features a 40mm Oystersteel (Rolex's branded 904L stainless steel alloy) topped with a blue and red Cerachrom bezel.",
+    collection: "Shop Rolex",
+  },
+  {
+    image: "./assets/watch07.jpg",
+    title: "Patek Philippe Aquanaut 5167/1A",
+    description: "When launched in 1997, the Aquanaut created a sensation. It was young, modern and unexpected. Its case was a rounded octagon.",
+    collection: "Shop Patek Philippe",
+  },
+  {
+    image: "./assets/watch08.jpg",
+    title: "Panerai Submersible",
+    description: "Panerai Submersible watches have been made with divers in mind. Each piece in this collection offers water-resistant functionality.",
+    collection: "Shop Panerai",
+  },
+];
 
-import watchesData from "../../products.json";
-
-// Define a type for a Product
-interface Product {
-  productName: string;
-  category: string;
-  price: string;
-  year?: string;
-  image: string;
-}
-
-// Slugify function to create slugs from product names
+// Create slug for each product
 const slugify = (title: string): string => {
   return title
     .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/(^-|-$)/g, '');
+    .replace(/[^a-z0-9]+/g, '-')  // Replace non-alphanumeric characters with hyphens
+    .replace(/(^-|-$)/g, '');     // Remove leading or trailing hyphens
 };
 ---
 
 <section class="whats-new-section">
   <h2>What's New</h2>
   <div class="new-items">
-    {watchesData.products.map((product: Product, index: number) => (
-      <div class={`item-card-wrapper ${index % 2 !== 0 ? 'reverse-layout' : ''}`}>
+    {products.map((product, index) => (
+      <div class={`item-card-wrapper ${index % 2 === 1 ? 'reverse-layout' : ''}`}>
         <div class="item-card">
-          <!-- Link around product image -->
-          <a href={`/${slugify(product.productName)}`}>
-            <img class="card-image" src={product.image} alt={product.productName} />
+          <!-- Link around the image -->
+          <a href={`/product/${slugify(product.title)}`}>
+            <img class="card-image" src={product.image} alt={product.title} />
           </a>
         </div>
         <div class="card-info">
           <!-- Link around the product title -->
-          <a href={`/${slugify(product.productName)}`} class="product-title">
-            {product.productName}
+          <a href={`/product/${slugify(product.title)}`} class="product-title">
+            {product.title}
           </a>
-          <p class="product-description">Category: {product.category}</p>
-          <p class="product-price">Price: ${product.price}</p>
-          <a href={`/${slugify(product.productName)}`} class="shop-now">
-            View Product
+          <p class="product-description">{product.description}</p>
+          <a href={`/product/${slugify(product.title)}`} class="shop-now">
+            {product.collection}
           </a>
         </div>
       </div>
     ))}
   </div>
 </section>
+
+<style>
+.whats-new-section {
+  color: #000;
+  padding: 40px 0;
+  text-align: center;
+}
+
+.whats-new-section h2 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 40px;
+  color: #f1c40f;
+}
+
+.new-items {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.item-card-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  width: 100%;
+  padding: 20px;
+}
+
+.reverse-layout {
+  flex-direction: row-reverse;
+}
+
+.item-card {
+  flex: 1;
+  max-width: 50%;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.item-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-info {
+  flex: 1;
+  max-width: 50%;
+  text-align: left;
+  padding: 20px;
+}
+
+.product-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #000;
+  margin-bottom: 10px;
+}
+
+.product-description {
+  color: #000;
+}
+
+.product-price {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #f1c40f;
+  margin-bottom: 10px;
+}
+
+.shop-now {
+  text-decoration: none;
+  color: #f1c40f;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.shop-now:hover {
+  text-decoration: underline;
+}
+</style>

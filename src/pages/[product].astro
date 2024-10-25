@@ -14,8 +14,8 @@ interface Product {
 const slugify = (title: string): string => {
   return title
     .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/(^-|-$)/g, '');
+    .replace(/[^a-z0-9]+/g, '-')  // Replace non-alphanumeric characters with hyphens
+    .replace(/(^-|-$)/g, '');     // Remove leading or trailing hyphens
 };
 
 // Access the dynamic slug (product name) from URL
@@ -23,7 +23,7 @@ const { product } = Astro.params;
 
 // Find the selected product based on the slug
 const selectedProduct = watchesData.products.find(
-  (p) => slugify(p.productName) === product
+  (p: Product) => slugify(p.productName) === product  // Explicitly type 'p' as 'Product'
 );
 
 if (!selectedProduct) {
@@ -35,5 +35,8 @@ if (!selectedProduct) {
   <h1 class="text-xl font-bold">{selectedProduct.productName}</h1>
   <p class="text-gray-600">Category: {selectedProduct.category}</p>
   <p class="text-gray-600">Price: ${selectedProduct.price}</p>
-  <img src={selectedProduct.image} alt={selectedProduct.productName} />
+  {selectedProduct.year && (
+    <p class="text-gray-600">Year: {selectedProduct.year}</p>
+  )}
+  <img src={selectedProduct.image} alt={selectedProduct.productName} class="mt-4 w-full h-auto"/>
 </section>
