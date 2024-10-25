@@ -1,32 +1,9 @@
 ---
-const products = [
-  {
-    image: "./assets/watch04.jpg",
-    title: "Rolex GMT Master II ‘Pepsi’",
-    description: "The GMT-Master II ref. 126710BLRO features a 40mm Oystersteel (Rolex's branded 904L stainless steel alloy) topped with a blue and red Cerachrom bezel.",
-    collection: "Shop Rolex",
-  },
-  {
-    image: "./assets/watch07.jpg",
-    title: "Patek Philippe Aquanaut 5167/1A",
-    description: "When launched in 1997, the Aquanaut created a sensation. It was young, modern and unexpected. Its case was a rounded octagon.",
-    collection: "Shop Patek Philippe",
-  },
-  {
-    image: "./assets/watch08.jpg",
-    title: "Panerai Submersible",
-    description: "Panerai Submersible watches have been made with divers in mind. Each piece in this collection offers water-resistant functionality.",
-    collection: "Shop Panerai",
-  },
-];
+import watchesData from "../../products.json"; // Import products from JSON
+import { slugify } from "../../utils/slugify"; // Import slugify function
 
-// Create slug for each product
-const slugify = (title: string): string => {
-  return title
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')  // Replace non-alphanumeric characters with hyphens
-    .replace(/(^-|-$)/g, '');     // Remove leading or trailing hyphens
-};
+// Use products from JSON
+const products = watchesData.products;
 ---
 
 <section class="whats-new-section">
@@ -36,18 +13,14 @@ const slugify = (title: string): string => {
       <div class={`item-card-wrapper ${index % 2 === 1 ? 'reverse-layout' : ''}`}>
         <div class="item-card">
           <!-- Link around the image -->
-          <a href={`/product/${slugify(product.title)}`}>
-            <img class="card-image" src={product.image} alt={product.title} />
+          <a href={`/product/${slugify(product.productName)}`}>
+            <img class="card-image" src={product.image} alt={product.productName} />
           </a>
         </div>
         <div class="card-info">
           <!-- Link around the product title -->
-          <a href={`/product/${slugify(product.title)}`} class="product-title">
-            {product.title}
-          </a>
-          <p class="product-description">{product.description}</p>
-          <a href={`/product/${slugify(product.title)}`} class="shop-now">
-            {product.collection}
+          <a href={`/product/${slugify(product.productName)}`} class="product-title">
+            {product.productName}
           </a>
         </div>
       </div>
@@ -56,6 +29,7 @@ const slugify = (title: string): string => {
 </section>
 
 <style>
+/* Add your existing styles here */
 .whats-new-section {
   color: #000;
   padding: 40px 0;

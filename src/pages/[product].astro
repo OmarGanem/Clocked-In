@@ -1,5 +1,6 @@
 ---
-import watchesData from "../../src/products.json";
+import watchesData from "../../src/products.json"; // Import the JSON data
+import { slugify } from "../../src/utils/slugify"; // Import slugify function
 
 // Define a type for a Product
 interface Product {
@@ -8,22 +9,28 @@ interface Product {
   price: string;
   year?: string;
   image: string;
+  description: string; // Add description to the type
 }
 
-// Slugify function to create slugs from product names
-const slugify = (title: string): string => {
-  return title
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')  // Replace non-alphanumeric characters with hyphens
-    .replace(/(^-|-$)/g, '');     // Remove leading or trailing hyphens
-};
+// Implementing getStaticPaths to create dynamic routes
+export async function getStaticPaths() {
+  // Create paths based on the products in watchesData
+  const paths = watchesData.products.map((product: Product) => ({
+    params: { product: slugify(product.productName) }
+  }));
+
+  return {
+    paths, // Array of paths
+    fallback: false, // No fallback; if true, missing pages will be generated at runtime
+  };
+}
 
 // Access the dynamic slug (product name) from URL
 const { product } = Astro.params;
 
 // Find the selected product based on the slug
 const selectedProduct = watchesData.products.find(
-  (p: Product) => slugify(p.productName) === product  // Explicitly type 'p' as 'Product'
+  (p: Product) => slugify(p.productName) === product
 );
 
 if (!selectedProduct) {
@@ -38,5 +45,6 @@ if (!selectedProduct) {
   {selectedProduct.year && (
     <p class="text-gray-600">Year: {selectedProduct.year}</p>
   )}
+  <p class="text-gray-600">{selectedProduct.description}</p> <!-- Display description -->
   <img src={selectedProduct.image} alt={selectedProduct.productName} class="mt-4 w-full h-auto"/>
 </section>

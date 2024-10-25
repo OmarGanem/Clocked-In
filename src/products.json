@@ -1,26 +1,28 @@
 {
-    "products": [
-      {
-        "productName": "Rolex GMT Master II ‘Pepsi’",
-        "category": "Rolex",
-        "price": "100",
-        "year": "2020",
-        "image": "./assets/watch04.jpg"
-      },
-      {
-        "productName": "Patek Philippe Aquanaut 5167/1A",
-        "category": "Patek Philippe",
-        "price": "200",
-        "year": "2019",
-        "image": "./assets/watch07.jpg"
-      },
-      {
-        "productName": "Panerai Submersible",
-        "category": "Panerai",
-        "price": "150",
-        "year": "2018",
-        "image": "./assets/watch08.jpg"
-      }
-    ]
-  }
-  
+  "products": [
+    {
+      "productName": "Rolex GMT Master II ‘Pepsi’",
+      "category": "Rolex",
+      "price": "100",
+      "year": "2021",
+      "image": "./assets/watch04.jpg",
+      "description": "The GMT-Master II ref. 126710BLRO features a 40mm Oystersteel topped with a blue and red Cerachrom bezel."
+    },
+    {
+      "productName": "Patek Philippe Aquanaut 5167/1A",
+      "category": "Patek Philippe",
+      "price": "200",
+      "year": "2019",
+      "image": "./assets/watch07.jpg",
+      "description": "The Aquanaut ref. 5167A offers a young, modern, and unexpected design with a rubber strap and stainless steel case."
+    },
+    {
+      "productName": "Panerai Submersible",
+      "category": "Panerai",
+      "price": "150",
+      "year": "2020",
+      "image": "./assets/watch08.jpg",
+      "description": "Panerai Submersible watches are built for deep dives, with advanced water resistance and a rugged design."
+    }
+  ]
+}
