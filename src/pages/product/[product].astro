@@ -1,0 +1,97 @@
+---
+import watchesData from "../../products.json"; // Import the JSON data
+import { slugify } from "../../utils/slugify"; // Import slugify function
+
+// Define a type for a Product
+interface Product {
+  productName: string;
+  category: string;
+  price: string;
+  year?: string;
+  image: string;
+  description: string; // Add description to the type
+}
+
+// Implementing getStaticPaths to create dynamic routes
+export async function getStaticPaths() {
+  // Create paths based on the products in watchesData
+  return watchesData.products.map((product: Product) => ({
+    params: { product: slugify(product.productName)}
+  }));
+}
+
+// Access the dynamic slug (product name) from URL
+const { product } = Astro.params;
+
+// Find the selected product based on the slug
+const selectedProduct = watchesData.products.find(
+  (p: Product) => slugify(p.productName) === product
+);
+
+if (!selectedProduct) {
+  throw new Error(`Product not found: ${product}`);
+}
+---
+
+<section class="product-page">
+  <div class="product-image">
+    <img src={selectedProduct.image} alt={selectedProduct.productName} />
+  </div>
+  <div class="product-info">
+    <h1 class="product-title">{selectedProduct.productName}</h1>
+    <p class="product-category"><strong>Category:</strong> {selectedProduct.category}</p>
+    <p class="product-price"><strong>Price:</strong> ${selectedProduct.price}</p>
+    {selectedProduct.year && <p class="product-year"><strong>Year:</strong> {selectedProduct.year}</p>}
+    <p class="product-description">{selectedProduct.description}</p>
+  </div>
+</section>
+
+<style>
+  .product-pago{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    color: #333;
+  }
+
+  .product-image {
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 20px;
+  }
+
+  .product-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .product-info {
+    text-align: center;
+  }
+
+  .product-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .product-category,
+  .product-price,
+  .product-year,
+  .product-description {
+    font-size: 1.1rem;
+    margin: 5px 0;
+  }
+
+  .product-category strong,
+  .product-price strong,
+  .product-year strong {
+    color: #f1c40f; 
+  }
+
+</style>

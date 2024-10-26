@@ -13,15 +13,15 @@ const products = watchesData.products;
       <div class={`item-card-wrapper ${index % 2 === 1 ? 'reverse-layout' : ''}`}>
         <div class="item-card">
           <!-- Link around the image -->
-          <a href={`/product/${slugify(product.productName)}`}>
-            <img class="card-image" src={product.image} alt={product.productName} />
-          </a>
+            <a href={`/product/${slugify(product.productName)}`}>
+              <img class="card-image" src={product.image} alt={product.productName} />
+            </a>
         </div>
         <div class="card-info">
           <!-- Link around the product title -->
-          <a href={`/product/${slugify(product.productName)}`} class="product-title">
+            <a href={`/product/${slugify(product.productName)}`} class="product-title">
             {product.productName}
-          </a>
+            </a>
         </div>
       </div>
     ))}
