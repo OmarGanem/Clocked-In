@@ -1,6 +1,7 @@
 ---
 import watchesData from "../../products.json"; // Import the JSON data
-import { slugify } from "../../utils/slugify"; // Import slugify function
+import { slugify } from "../../utils/slugify"; // Import the slugify function
+import Layout from '../../layouts/Layout.astro';
 
 // Define a type for a Product
 interface Product {
@@ -9,14 +10,14 @@ interface Product {
   price: string;
   year?: string;
   image: string;
-  description: string; // Add description to the type
+  description: string;
+  sku?: string; // Add SKU if you have it in the JSON
 }
 
 // Implementing getStaticPaths to create dynamic routes
 export async function getStaticPaths() {
-  // Create paths based on the products in watchesData
   return watchesData.products.map((product: Product) => ({
-    params: { product: slugify(product.productName)}
+    params: { product: slugify(product.productName) }
   }));
 }
 
@@ -32,66 +33,93 @@ if (!selectedProduct) {
   throw new Error(`Product not found: ${product}`);
 }
 ---
+<Layout description="Page not found. Please check the URL in the address bar and try again."
+title="Not found · Clocked In">
+  <section class="product-page">
+  
+    <!-- Left section: Image gallery -->
+    <div class="product-gallery">
+      <img class="gallery-image" src={selectedProduct.image} alt={selectedProduct.productName} />
+      <img class="gallery-image" src={selectedProduct.image} alt={selectedProduct.productName} />
+      <img class="gallery-image" src={selectedProduct.image} alt={selectedProduct.productName} />
+      <img class="gallery-image" src={selectedProduct.image} alt={selectedProduct.productName} />
+    </div>
+  
+    <!-- Right section: Product details -->
+    <div class="product-details">
+      <h1 class="product-title">{selectedProduct.productName}</h1>
+      <p class="product-sku">SKU: {selectedProduct.sku || "N/A"}</p>
+      <p class="product-price">Price: ${selectedProduct.price}</p>
+      <p class="product-description">{selectedProduct.description}</p>
 
-<section class="product-page">
-  <div class="product-image">
-    <img src={selectedProduct.image} alt={selectedProduct.productName} />
-  </div>
-  <div class="product-info">
-    <h1 class="product-title">{selectedProduct.productName}</h1>
-    <p class="product-category"><strong>Category:</strong> {selectedProduct.category}</p>
-    <p class="product-price"><strong>Price:</strong> ${selectedProduct.price}</p>
-    {selectedProduct.year && <p class="product-year"><strong>Year:</strong> {selectedProduct.year}</p>}
-    <p class="product-description">{selectedProduct.description}</p>
-  </div>
-</section>
+          <div class="product-specifications">
+            <p><strong>Year:</strong> {selectedProduct.year || "N/A"}</p>
+            <p><strong>Category:</strong> {selectedProduct.category}</p>
+            <p><strong>Condition:</strong> Excellent</p>
+            <p><strong>Box:</strong> Yes</p>
+            <p><strong>Papers:</strong> Yes</p>
+            <p><strong>Bezel:</strong> Ceramic</p>
+            <p><strong>Case:</strong> 40mm, Steel</p>
+            <p><strong>Movement:</strong> Automatic</p>
+          </div>
+      </div>
+  </section>
 
-<style>
-  .product-pago{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    max-width: 800px;
-    margin: 0 auto;
-    color: #333;
-  }
+  <style>
+    .product-page {
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 0 auto;
+      gap: 2rem;
+      padding: 2rem;
+      color: #333;
+    }
 
-  .product-image {
-    width: 100%;
-    max-width: 400px;
-    margin-bottom: 20px;
-  }
+    .product-gallery {
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); /* Two columns */
+      gap: 1rem;
+      max-width: 400px;
+    }
 
-  .product-image img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
+    .gallery-image {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      object-fit: cover;
+    }
 
-  .product-info {
-    text-align: center;
-  }
+    .product-details {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+    }
 
-  .product-title {
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
+    .product-title {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
 
-  .product-category,
-  .product-price,
-  .product-year,
-  .product-description {
-    font-size: 1.1rem;
-    margin: 5px 0;
-  }
+    .product-sku, .product-price, .product-description {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
 
-  .product-category strong,
-  .product-price strong,
-  .product-year strong {
-    color: #f1c40f; 
-  }
+    .product-specifications {
+      margin-top: 1rem;
+    }
 
-</style>
+    .product-specifications p {
+      margin: 0.3rem 0;
+    }
+
+    .product-specifications p strong {
+      color: #f1c40f;
+    }
+  </style>
+</Layout>
