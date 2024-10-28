@@ -1,0 +1,87 @@
+---
+// Define a simple component with placeholders for images and content
+const sourceWatchImage = "/assets/test.png";
+const sellWatchImage = "/assets/test.png";
+---
+
+<section class="source-sell-section">
+  <div class="container">
+    <!-- Source a Watch -->
+      <div class="section-item">
+        <img src={sourceWatchImage} alt="Source a Watch" class="section-image" />
+        <h2 class="section-title">Source a Watch</h2>
+          <p class="section-description">
+            With over 20 years of combined experience, we have sourced some of the rarest and most
+            exclusive watches. Our commitment to quality and authenticity ensures you get only the best.
+          </p>
+      </div>
+
+    <!-- Sell Your Watch -->
+    <div class="section-item">
+      <img src={sellWatchImage} alt="Sell Your Watch" class="section-image" />
+        <h2 class="section-title">Sell Your Watch</h2>
+          <p class="section-description">
+            Integrity above all else, we know the watch market inside out, and our experts will keep you
+            informed every step of the way. Get the best value for your luxury timepiece.
+          </p>
+      </div>
+  </div>
+</section>
+
+<style>
+  .source-sell-section {
+    display: flex;
+    justify-content: center;
+    padding: 50px 20px;
+    background-color: #f7f7f7;
+  }
+
+  .container {
+    display: flex;
+    gap: 40px;
+    max-width: 1200px;
+    width: 100%;
+  }
+
+  .section-item {
+    flex: 1;
+    text-align: center;
+  }
+
+  .section-image {
+    width: 100%;
+    height: auto;
+    max-width: 500px;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 20px;
+  }
+
+  .section-description {
+    font-size: 1rem;
+    color: #555;
+    margin-top: 10px;
+    line-height: 1.6;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .section-title {
+      font-size: 1.25rem;
+    }
+
+    .section-description {
+      font-size: 0.9rem;
+    }
+  }
+</style>
