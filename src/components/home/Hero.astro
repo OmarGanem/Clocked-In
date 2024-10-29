@@ -4,47 +4,192 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Styled Slideshow</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #000;
+    }
+
+    .slideshow-container {
+      max-width: 100%;
+      position: relative;
+      margin: auto;
+      overflow: hidden;
+    }
+
+    .mySlides {
+      position: absolute;
+      width: 100%;
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
+    }
+
+    .mySlides img {
+      width: 100%;
+      vertical-align: middle;
+    }
+
+    /* Dark overlay */
+    .slide-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: left;
+      padding-left: 5%;
+    }
+
+    /* Centered content styling */
+    .slide-content {
+      color: #fff;
+      max-width: 300px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fade-up 1.5s ease forwards;
+    }
+
+    /* Text and Button animations */
+    @keyframes fade-up {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .slide-content, .view-all-button {
+      animation-delay: 0.3s;
+    }
+
+    .product-id {
+      font-size: 14px;
+      letter-spacing: 2px;
+      color: #ccc;
+      margin-bottom: 10px;
+    }
+
+    .product-name {
+      font-size: 32px;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .view-all-button {
+      padding: 12px 24px;
+      font-size: 14px;
+      color: #000;
+      background-color: #fff;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      text-transform: uppercase;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fade-up 1.5s ease forwards;
+      animation-delay: 0.6s; /* Delay button animation */
+    }
+
+    .view-all-button:hover {
+      background-color: #ccc;
+    }
+
+    /* Dot navigation styling */
+    .dot-container {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+    }
+
+    .dot {
+      cursor: pointer;
+      height: 10px;
+      width: 10px;
+      margin: 0 5px;
+      background-color: #bbb;
+      border-radius: 50%;
+      display: inline-block;
+      transition: background-color 0.6s ease;
+    }
+
+    .active, .dot:hover {
+      background-color: #fff;
+    }
+
+    .active-slide {
+      opacity: 1;
+      position: relative;
+      z-index: 1;
+    }
+  </style>
 </head>
 <body>
   <div class="slideshow-container">
 
     <!-- Slide 1 -->
-    <div class="mySlides fade">
-      <div class="numbertext">1 / 3</div>
-      <img src="./assets/watches.webp" style="width:100%">
-      <div class="text">Image One</div>
+    <div class="mySlides active-slide">
+      <img src="./assets/watches.webp" alt="Image One">
+      <div class="slide-overlay">
+        <div class="slide-content">
+          <div class="product-id">116500LN</div>
+          <div class="product-name">Rolex</div>
+          <button class="view-all-button">View All</button>
+        </div>
+      </div>
     </div>
 
     <!-- Slide 2 -->
-    <div class="mySlides fade">
-      <div class="numbertext">2 / 3</div>
-      <img src="./assets/watches03.webp" style="width:100%">
-      <div class="text">Image Two</div>
+    <div class="mySlides">
+      <img src="./assets/watches03.webp" alt="Image Two">
+      <div class="slide-overlay">
+        <div class="slide-content">
+          <div class="product-id">7900TI</div>
+          <div class="product-name">Audemars Piguet</div>
+          <button class="view-all-button">View All</button>
+        </div>
+      </div>
     </div>
 
     <!-- Slide 3 -->
-    <div class="mySlides fade">
-      <div class="numbertext">3 / 3</div>
-      <img src="./assets/watches04.webp" style="width:100%">
-      <div class="text">Image Three</div>
+    <div class="mySlides">
+      <img src="./assets/watches04.webp" alt="Image Three">
+      <div class="slide-overlay">
+        <div class="slide-content">
+          <div class="product-id">5711/1A</div>
+          <div class="product-name">Patek Philippe</div>
+          <button class="view-all-button">View All</button>
+        </div>
+      </div>
     </div>
 
-  <!-- The dots -->
-  <div style="text-align:center">
-    <span class="dot" onclick="currentSlide(1)"></span>
-    <span class="dot" onclick="currentSlide(2)"></span>
-    <span class="dot" onclick="currentSlide(3)"></span>
+    <!-- Dot navigation -->
+    <div class="dot-container">
+      <span class="dot" onclick="currentSlide(1)"></span>
+      <span class="dot" onclick="currentSlide(2)"></span>
+      <span class="dot" onclick="currentSlide(3)"></span>
+    </div>
   </div>
 
   <script>
-    let slideIndex: number = 0;
-    let slideInterval: ReturnType<typeof setInterval>; // Type annotation for setInterval ID
+    let slideIndex = 0;
+    let slideInterval;
 
-    // Show slides when page loads
-    showSlides();
+    // Initialize and start slideshow
+    showSlides(slideIndex);
+    autoSlides();
 
     // Auto-slide functionality
-    function autoSlides(): void {
+    function autoSlides() {
       slideInterval = setInterval(() => {
         slideIndex++;
         showSlides(slideIndex);
@@ -52,123 +197,49 @@
     }
 
     // Dot navigation
-    function currentSlide(n: number): void {
+    function currentSlide(n) {
       clearInterval(slideInterval); // Clear interval on manual navigation
       showSlides(slideIndex = n - 1);
       autoSlides(); // Restart auto-slide after manual change
     }
 
-    // Show the appropriate slide
-    function showSlides(n?: number): void {
-      if (typeof n === "undefined") {
-        n = slideIndex;
+    // Show the appropriate slide with smooth transition
+    function showSlides(n) {
+      const slides = document.getElementsByClassName("mySlides");
+      const dots = document.getElementsByClassName("dot");
+
+      // Reset slideIndex if it exceeds bounds
+      if (n >= slides.length) slideIndex = 0;
+      if (n < 0) slideIndex = slides.length - 1;
+
+      // Hide all slides by removing 'active-slide' class
+      for (let i = 0; i < slides.length; i++) {
+        slides[i].classList.remove("active-slide");
+
+        // Reset animations for text and button on hidden slides
+        const content = slides[i].querySelector(".slide-content");
+        const button = slides[i].querySelector(".view-all-button");
+        content.style.animation = "none";
+        button.style.animation = "none";
       }
 
-      let i: number;
-      let slides = document.getElementsByClassName("mySlides");
-      let dots = document.getElementsByClassName("dot");
+      // Display the current slide with fade-in effect
+      slides[slideIndex].classList.add("active-slide");
 
-      if (n >= slides.length) {slideIndex = 0;}
-      if (n < 0) {slideIndex = slides.length - 1;}
+      // Trigger animations on new slide
+      const activeContent = slides[slideIndex].querySelector(".slide-content");
+      const activeButton = slides[slideIndex].querySelector(".view-all-button");
+      void activeContent.offsetWidth; // Trigger reflow to restart animation
+      void activeButton.offsetWidth;
+      activeContent.style.animation = "fade-up 1.5s ease forwards";
+      activeButton.style.animation = "fade-up 1.5s ease forwards 0.6s";
 
-      for (i = 0; i < slides.length; i++) {
-        (slides[i] as HTMLElement).style.display = "none"; // Hide all slides
-      }
-
-      for (i = 0; i < dots.length; i++) {
+      // Update dot indicators
+      for (let i = 0; i < dots.length; i++) {
         dots[i].className = dots[i].className.replace(" active", "");
       }
-
-      (slides[slideIndex] as HTMLElement).style.display = "block"; // Show current slide
       dots[slideIndex].className += " active";
     }
-
-    // Start auto-sliding
-    autoSlides();
   </script>
 </body>
 </html>
-
-<style>
-* {
-  box-sizing: border-box;
-}
-
-body {
-  font-family: Arial, sans-serif;
-}
-
-.mySlides {
-  display: none;
-}
-
-img {
-  vertical-align: middle;
-}
-
-.slideshow-container {
-  max-width: 100%;
-  position: relative;
-  margin: auto;
-}
-
-.prev:hover, .next:hover {
-  background-color: rgba(0,0,0,0.8);
-}
-
-.text {
-  color: #f2f2f2;
-  font-size: 15px;
-  padding: 8px 12px;
-  position: absolute;
-  bottom: 8px;
-  width: 100%;
-  text-align: center;
-}
-
-.numbertext {
-  color: #f2f2f2;
-  font-size: 12px;
-  padding: 8px 12px;
-  position: absolute;
-  top: 0;
-}
-
-.dot {
-  cursor: pointer;
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-  transition: background-color 0.6s ease;
-}
-
-.active, .dot:hover {
-  background-color: #717171;
-}
-
-/* Fading animation */
-.fade {
-  -webkit-animation-name: fade;
-  -webkit-animation-duration: 1.5s;
-  animation-name: fade;
-  animation-duration: 1.5s;
-}
-
-@-webkit-keyframes fade {
-  from {opacity: 0.4}
-  to {opacity: 1}
-}
-
-@keyframes fade {
-  from {opacity: 0.4}
-  to {opacity: 1}
-}
-
-/* Media query for smaller screens */
-@media only screen and (max-width: 300px) {
-  .prev, .next, .text {font-size: 11px;}
-}
-</style>
