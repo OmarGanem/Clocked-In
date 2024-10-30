@@ -28,7 +28,7 @@
       position: absolute;
       width: 100%;
       opacity: 0;
-      transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1); /* Ease-out at start, ease-in at end */
+      transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1); /* Smooth fade */
     }
 
     .mySlides img {
@@ -56,17 +56,13 @@
       max-width: 300px;
       opacity: 0;
       transform: translateY(20px);
-      animation: fade-up 1.5s ease forwards;
+      transition: opacity 0.5s ease, transform 0.5s ease;
     }
 
     /* Text and Button animations */
-    @keyframes fade-up {
-      0% { opacity: 0; transform: translateY(20px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-
-    .slide-content, .view-all-button {
-      animation-delay: 0.3s;
+    .slide-content.fade-in {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .product-id {
@@ -94,8 +90,12 @@
       text-transform: uppercase;
       opacity: 0;
       transform: translateY(20px);
-      animation: fade-up 1.5s ease forwards;
-      animation-delay: 0.6s; /* Delay button animation */
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .view-all-button.fade-in {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .view-all-button:hover {
@@ -111,7 +111,6 @@
 </head>
 <body>
   <div class="slideshow-container">
-
     <!-- Slide 1 -->
     <div class="mySlides active-slide">
       <img src="./assets/watches.webp" alt="Image One">
@@ -147,6 +146,7 @@
         </div>
       </div>
     </div>
+  </div>
 
   <script>
     let slideIndex = 0;
@@ -165,8 +165,8 @@
     }
 
     // Show the appropriate slide with smooth transition
-    function showSlides(n: number): void {
-      const slides = document.getElementsByClassName("mySlides") as HTMLCollectionOf<HTMLElement>;
+    function showSlides(n) {
+      const slides = document.getElementsByClassName("mySlides");
 
       // Reset slideIndex for infinite loop
       slideIndex = (n >= slides.length) ? 0 : n;
@@ -175,10 +175,37 @@
       // Hide all slides by removing 'active-slide' class
       for (let i = 0; i < slides.length; i++) {
         slides[i].classList.remove("active-slide");
+
+        // Reset animations for text and button
+        const content = slides[i].querySelector(".slide-content");
+        const button = slides[i].querySelector(".view-all-button");
+        if (content && button) {
+          content.classList.remove("fade-in");
+          button.classList.remove("fade-in");
+        }
       }
 
       // Display the current slide with fade-in effect
       slides[slideIndex].classList.add("active-slide");
+
+      // Special handling to remove flash when moving from last to first slide
+      if (slideIndex === 0) {
+        slides[slideIndex].style.transition = "none"; // Remove transition for the first slide
+        setTimeout(() => {
+          slides[slideIndex].style.transition = ""; // Reapply transition after the first show
+        }, 100); // Short timeout to re-enable transition
+      }
+
+      // Trigger fade-in animation for text and button
+      const activeSlide = slides[slideIndex];
+      const activeContent = activeSlide.querySelector(".slide-content");
+      const activeButton = activeSlide.querySelector(".view-all-button");
+      if (activeContent && activeButton) {
+        setTimeout(() => {
+          activeContent.classList.add("fade-in");
+          activeButton.classList.add("fade-in");
+        }, 100); // Delay to ensure smooth animation on slide change
+      }
     }
   </script>
 </body>
