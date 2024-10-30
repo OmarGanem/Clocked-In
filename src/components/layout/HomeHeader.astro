@@ -56,12 +56,10 @@ const links: Link[] = [
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
-
 body {
   background: #000;
   min-height: 200vh;
 }
-
 /* Sticky Navbar */
 header {
   position: fixed;
@@ -77,28 +75,23 @@ header {
   z-index: 10000;
   background: transparent;
 }
-
 header.sticky {
   padding: 3px 30px;
   background: #fff;
 }
-
 /* Logo Styling */
 header .logo {
   position: relative;
   text-align: center;
 }
-
 header .logo img {
   width: 100%;
   max-width: 200px;
 }
-
 header.sticky .logo img {
   width: 100%;
   max-width: 200px;
 }
-
 /* Navigation Menu */
 header ul {
   display: flex;
@@ -106,11 +99,9 @@ header ul {
   align-items: center;
   margin-top: 5px;
 }
-
 header ul li {
   list-style: none;
 }
-
 header ul li a {
   margin: 0 8px;
   text-decoration: none;
@@ -118,8 +109,14 @@ header ul li a {
   position: relative;
   transition: 0.6s;
 }
-
 nav a:hover {
   text-decoration: underline;
+}
+.header-spacer {
+  height: 60px; /* Match the header's height before scroll */
+  transition: height 0.3s;
+}
+header.sticky + .header-spacer {
+  height: 50px; /* Adjust to match the compressed sticky header height */
 }
 </style>

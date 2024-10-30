@@ -3,7 +3,8 @@ import '@fontsource/inter/latin-400.css';
 import '@fontsource/inter/latin-500.css';
 import { ViewTransitions } from 'astro:transitions';
 import Footer from '../components/layout/Footer.astro';
-import Header from '../components/layout/Header.astro';
+import HomeHeader from '../components/layout/HomeHeader.astro';
+import DefaultHeader from '../components/layout/DefaultHeader.astro';
 
 interface Props {
   description: string;
@@ -11,6 +12,9 @@ interface Props {
 }
 
 const { description, title } = Astro.props;
+
+// Determine if the current page is the homepage
+const isHomePage = Astro.url.pathname === '/';
 ---
 
 <!DOCTYPE html>
@@ -27,10 +31,11 @@ const { description, title } = Astro.props;
     <title>{title}</title>
     <ViewTransitions />
   </head>
-  <body
-    class="bg-primary-50 text-primary-950 antialiased transition"
-  >
-    <Header />
+  <body class="bg-primary-50 text-primary-950 antialiased transition">
+    
+    <!-- Conditionally render HomeHeader for the homepage and DefaultHeader for other pages -->
+    {isHomePage ? <HomeHeader /> : <DefaultHeader />}
+
     <main>
       <slot />
     </main>
@@ -40,7 +45,7 @@ const { description, title } = Astro.props;
       body {
         background-repeat: repeat;
         background-attachment: scroll;
-        background-size: auto;
+        background-size: auto;  
         background-color: #000000;
       }
     </style>

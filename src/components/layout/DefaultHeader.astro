@@ -1,0 +1,106 @@
+---
+// DefaultHeader for non-home pages, identical to HomeHeader but without transparency effect.
+interface Link {
+  ref: string;
+  name: string;
+  href: string;
+}
+
+const links: Link[] = [
+  { ref: '', name: 'Home', href: '/' },
+  { ref: '', name: 'Sourcing', href: '/contact' },
+  { ref: '', name: 'Buy', href: '/pricing' },
+  { ref: '', name: 'Sell', href: '/categories' },
+];
+---
+
+<header id="default-header">
+  <div class="mx-auto flex flex-col items-center justify-center px-2 py-1 sm:px-2 sm:py-1 lg:max-w-7xl lg:px-4">
+    <!-- Brand logo -->
+    <div class="flex justify-center w-full mb-1">
+      <a href="/" class="logo">
+        <img src="/Clocked_In_Logo.svg" alt="Logo" class="responsive-logo" />
+      </a>
+      <style is:global>
+        .responsive-logo {
+          width: 40%; 
+          max-width: 250px; 
+          height: auto;
+        }
+      </style>
+    </div>
+
+    <!-- Navigation Menu -->
+    <nav>
+      <ul class="flex space-x-4 text-black text-lg uppercase tracking-wider">
+        {links.map((link) => (
+          <li><a href={link.href} class="hover:underline transition">{link.name}</a></li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Spacer div to create more space below the fixed header -->
+<div class="header-spacer"></div>
+
+<style is:global>
+  /* Universal Styles */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+  body {
+    background: #000;
+    min-height: 200vh;
+  }
+  /* Fixed Navbar without transparency */
+  #default-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 30px;
+    z-index: 10000;
+    background: #fff;
+  }
+  /* Logo Styling */
+  #default-header .logo {
+    position: relative;
+    text-align: center;
+  }
+  #default-header .logo img {
+    width: 100%;
+    max-width: 200px;
+  }
+  /* Navigation Menu */
+  #default-header ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5px;
+  }
+  #default-header ul li {
+    list-style: none;
+  }
+  #default-header ul li a {
+    margin: 0 8px;
+    text-decoration: none;
+    color: #000;
+    position: relative;
+    transition: 0.6s;
+  }
+  nav a:hover {
+    text-decoration: underline;
+  }
+  /* Spacer to offset content from the fixed header */
+  .header-spacer {
+    height: 270px; /* Increase this to add more space below the header */
+  }
+</style>
