@@ -28,7 +28,7 @@
       position: absolute;
       width: 100%;
       opacity: 0;
-      transition: opacity 1.5s ease-in-out;
+      transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1); /* Ease-out at start, ease-in at end */
     }
 
     .mySlides img {
@@ -102,30 +102,6 @@
       background-color: #ccc;
     }
 
-    /* Dot navigation styling */
-    .dot-container {
-      position: absolute;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-    }
-
-    .dot {
-      cursor: pointer;
-      height: 10px;
-      width: 10px;
-      margin: 0 5px;
-      background-color: #bbb;
-      border-radius: 50%;
-      display: inline-block;
-      transition: background-color 0.6s ease;
-    }
-
-    .active, .dot:hover {
-      background-color: #fff;
-    }
-
     .active-slide {
       opacity: 1;
       position: relative;
@@ -172,14 +148,6 @@
       </div>
     </div>
 
-    <!-- Dot navigation -->
-    <div class="dot-container">
-      <span class="dot" onclick="currentSlide(1)"></span>
-      <span class="dot" onclick="currentSlide(2)"></span>
-      <span class="dot" onclick="currentSlide(3)"></span>
-    </div>
-  </div>
-
   <script>
     let slideIndex = 0;
     let slideInterval;
@@ -196,49 +164,21 @@
       }, 3000); // Change slides every 3 seconds
     }
 
-    // Dot navigation
-    function currentSlide(n) {
-      clearInterval(slideInterval); // Clear interval on manual navigation
-      showSlides(slideIndex = n - 1);
-      autoSlides(); // Restart auto-slide after manual change
-    }
-
     // Show the appropriate slide with smooth transition
-    function showSlides(n) {
-      const slides = document.getElementsByClassName("mySlides");
-      const dots = document.getElementsByClassName("dot");
+    function showSlides(n: number): void {
+      const slides = document.getElementsByClassName("mySlides") as HTMLCollectionOf<HTMLElement>;
 
-      // Reset slideIndex if it exceeds bounds
-      if (n >= slides.length) slideIndex = 0;
-      if (n < 0) slideIndex = slides.length - 1;
+      // Reset slideIndex for infinite loop
+      slideIndex = (n >= slides.length) ? 0 : n;
+      slideIndex = (n < 0) ? slides.length - 1 : slideIndex;
 
       // Hide all slides by removing 'active-slide' class
       for (let i = 0; i < slides.length; i++) {
         slides[i].classList.remove("active-slide");
-
-        // Reset animations for text and button on hidden slides
-        const content = slides[i].querySelector(".slide-content");
-        const button = slides[i].querySelector(".view-all-button");
-        content.style.animation = "none";
-        button.style.animation = "none";
       }
 
       // Display the current slide with fade-in effect
       slides[slideIndex].classList.add("active-slide");
-
-      // Trigger animations on new slide
-      const activeContent = slides[slideIndex].querySelector(".slide-content");
-      const activeButton = slides[slideIndex].querySelector(".view-all-button");
-      void activeContent.offsetWidth; // Trigger reflow to restart animation
-      void activeButton.offsetWidth;
-      activeContent.style.animation = "fade-up 1.5s ease forwards";
-      activeButton.style.animation = "fade-up 1.5s ease forwards 0.6s";
-
-      // Update dot indicators
-      for (let i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" active", "");
-      }
-      dots[slideIndex].className += " active";
     }
   </script>
 </body>
