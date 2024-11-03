@@ -1,5 +1,5 @@
 ---
-//  images and content
+// Images and content
 const sourceWatchImage = "/assets/test.png";
 const sellWatchImage = "/assets/test.png";
 ---
@@ -7,24 +7,28 @@ const sellWatchImage = "/assets/test.png";
 <section class="source-sell-section">
   <div class="container">
     <!-- Source a Watch -->
-      <div class="section-item">
-        <img src={sourceWatchImage} alt="Source a Watch" class="section-image" />
-        <h2 class="section-title">Source a Watch</h2>
-          <p class="section-description">
-            With over 20 years of combined experience, we have sourced some of the rarest and most
-            exclusive watches. Our commitment to quality and authenticity ensures you get only the best.
-          </p>
-      </div>
+    <div class="section-item">
+      <img src={sourceWatchImage} alt="Source a Watch" class="section-image" />
+      <h2 class="section-title">
+        <a href="/contact" class="section-link">Source a Watch</a>
+      </h2>
+      <p class="section-description">
+        With over 20 years of combined experience, we have sourced some of the rarest and most
+        exclusive watches. Our commitment to quality and authenticity ensures you get only the best.
+      </p>
+    </div>
 
     <!-- Sell Your Watch -->
     <div class="section-item">
       <img src={sellWatchImage} alt="Sell Your Watch" class="section-image" />
-        <h2 class="section-title">Sell Your Watch</h2>
-          <p class="section-description">
-            Integrity above all else, we know the watch market inside out, and our experts will keep you
-            informed every step of the way. Get the best value for your luxury timepiece.
-          </p>
-      </div>
+      <h2 class="section-title">
+        <a href="/pricing" class="section-link">Sell Your Watch</a>
+      </h2>
+      <p class="section-description">
+        Integrity above all else, we know the watch market inside out, and our experts will keep you
+        informed every step of the way. Get the best value for your luxury timepiece.
+      </p>
+    </div>
   </div>
 </section>
 
@@ -33,7 +37,6 @@ const sellWatchImage = "/assets/test.png";
     display: flex;
     justify-content: center;
     padding: 50px 20px;
-    background-color: #f7f7f7;
   }
 
   .container {
@@ -63,6 +66,19 @@ const sellWatchImage = "/assets/test.png";
     font-size: 1.5rem;
     font-weight: bold;
     margin-top: 20px;
+  }
+
+  /* Link styling for underline effect on hover and focus */
+  .section-link {
+    text-decoration: none;
+    color: inherit;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.3s ease;
+  }
+
+  .section-link:hover,
+  .section-link:focus {
+    border-bottom-color: #007bff; /* Customize the color as desired */
   }
 
   .section-description {

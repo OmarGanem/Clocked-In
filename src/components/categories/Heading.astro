@@ -1,31 +1,180 @@
+---
+import { slugify } from '../../utils/slugify';
+// Import the JSON data (make sure the path is correct)
+import productsData from '../../products.json';
 
-<section class="py-16 sm:py-20">
-  <div class="mx-auto max-w-2xl px-4 text-center sm:px-6 lg:max-w-7xl lg:px-8">
-    <div class="flex flex-col gap-4 sm:gap-6">
-      <h1 class="text-4xl font-medium tracking-tight sm:text-5xl lg:text-6xl">Browse Our Watches</h1>
-    </div>
+// Define TypeScript interface for products
+interface Product {
+  productName: string;
+  category: string;
+  price: string;
+  image: string;
+  description?: string; // Optional in case some products don't have a description
+}
+
+// Use productsData.products with the type Product[]
+const products: Product[] = productsData.products;
+---
+
+<section class="whats-new-section">
+  <!-- Filter Buttons -->
+  <div class="filter-buttons">
+    <button class="filter-button" data-filter="all">All</button>
+    <button class="filter-button" data-filter="Rolex">Rolex</button>
+    <button class="filter-button" data-filter="Richard Mille">Richard Mille</button>
+    <button class="filter-button" data-filter="Panerai">Panerai</button>
+  </div>
+
+  <!-- Search Input -->
+  <div id="search-container">
+    <input type="text" id="search-input" placeholder="Search product name here...">
+    <button id="search">Search</button>
+  </div>
+
+  <!-- Product Cards -->
+  <div class="new-items" id="products-container">
+    {products.map((product) => (
+      <div class="item-card-wrapper" data-category={product.category} data-name={product.productName}>
+        <div class="item-card">
+          <a href={`/products/${slugify(product.productName)}`}>
+            <img class="card-image" src={product.image} alt={product.productName} />
+          </a>
+        </div>
+        <div class="card-info">
+          <h3 class="product-title">{product.productName}</h3>
+          <p class="product-price">£{product.price}</p>
+          <p class="product-description">{product.description}</p>
+          <a href={`/products/${slugify(product.productName)}`} class="shop-now">Shop Now</a>
+        </div>
+      </div>
+    ))}
   </div>
 </section>
 
-<section class="py-16 sm:py-20">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <!-- Product Filter and Search Section -->
-      <div class="wrapper">
-        <div id="search-container">
-          <input
-            type="search"
-            id="search-input"
-            placeholder="Search product name here.."
-          />
-          <button id="search">Search</button>
-        </div>
-        <div id="buttons">
-          <button class="button-value" onclick="filterProduct('all')">All</button>
-          <button class="button-value" onclick="filterProduct('Topwear')">Rolex</button>
-          <button class="button-value" onclick="filterProduct('Bottomwear')">Patek Phillipe</button>
-        </div>
-        <div id="products"></div>
-      </div>
-    </div>
-  </section>
-  <script src="/src/scripts/script.js"></script>
+<script src="/src/scripts/filter.js" type="module"></script>
+
+<style>
+/* Section Wrapper */
+.whats-new-section {
+  padding: 60px 20px;
+  background-color: #f8f9fa;
+  text-align: center;
+}
+
+/* Filter Buttons */
+.filter-buttons {
+  margin-bottom: 20px;
+}
+
+.filter-button {
+  padding: 8px 16px;
+  margin: 5px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.filter-button:hover {
+  background-color: #555;
+}
+
+/* Search Container */
+#search-container {
+  margin-bottom: 20px;
+}
+
+#search-input {
+  padding: 8px;
+  margin-right: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+/* Product Grid Layout */
+.new-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Product Card Styling */
+.item-card-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.item-card-wrapper:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Product Image */
+.card-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  object-fit: cover;
+}
+
+/* Product Title and Price */
+.product-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  margin: 5px 0;
+}
+
+.product-price {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+/* Product Description */
+.product-description {
+  font-size: 0.9rem;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+/* Shop Now Link */
+.shop-now {
+  color: #f1c40f;
+  font-weight: bold;
+  text-decoration: none;
+  border-bottom: 1px solid #f1c40f;
+  padding-bottom: 2px;
+  transition: color 0.3s, border-color 0.3s;
+}
+
+.shop-now:hover {
+  color: #333;
+  border-color: #333;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .new-items {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .new-items {
+    grid-template-columns: 1fr;
+  }
+}
+</style>

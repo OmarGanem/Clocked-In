@@ -8,7 +8,7 @@ interface Link {
 const links: Link[] = [
   { ref: '', name: 'Home', href: '/' },
   { ref: '', name: 'Sourcing', href: '/contact' },
-  { ref: '', name: 'Buy', href: '/pricing' },
+  { ref: '', name: 'Buy', href: '/categories' },
   { ref: '', name: 'Sell', href: '/contact' },
 ];
 ---
@@ -49,7 +49,7 @@ const links: Link[] = [
 </script>
 
 <style>
-/* Universal Styles */
+
 * {
   margin: 0;
   padding: 0;
@@ -71,12 +71,12 @@ header {
   justify-content: center;
   align-items: center;
   transition: 0.10s;
-  padding: 5px 30px;
+  padding: 5px 20px;
   z-index: 10000;
   background: transparent;
 }
 header.sticky {
-  padding: 3px 30px;
+  padding: 5px 20px;
   background: #fff;
 }
 /* Logo Styling */
@@ -86,18 +86,18 @@ header .logo {
 }
 header .logo img {
   width: 100%;
-  max-width: 200px;
+  max-width: 125px;
 }
 header.sticky .logo img {
   width: 100%;
-  max-width: 200px;
+  max-width: 125px;
 }
 /* Navigation Menu */
 header ul {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 5px;
+  margin-top: 0px;
 }
 header ul li {
   list-style: none;
@@ -113,10 +113,10 @@ nav a:hover {
   text-decoration: underline;
 }
 .header-spacer {
-  height: 60px; /* Match the header's height before scroll */
+  height: 30%; /* Match the header's height before scroll */
   transition: height 0.3s;
 }
 header.sticky + .header-spacer {
-  height: 50px; /* Adjust to match the compressed sticky header height */
+  height: 30%; /* Adjust to match the compressed sticky header height */
 }
 </style>

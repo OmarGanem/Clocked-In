@@ -1,65 +1,80 @@
----
-import watchesData from "../../products.json"; // Import products from JSON
-import { slugify } from "../../utils/slugify"; // Import slugify function
-
-// Use products from JSON
-const products = watchesData.products;
----
-
 <section class="whats-new-section">
-  <h2>What's New</h2>
   <div class="new-items">
-    {products.map((product, index) => (
-      <div class={`item-card-wrapper ${index % 2 === 1 ? 'reverse-layout' : ''}`}>
-        <div class="item-card">
-          <!-- Link around the image -->
-            <a href={`/product/${slugify(product.productName)}`}>
-              <img class="card-image" src={product.image} alt={product.productName} />
-            </a>
-        </div>
-        <div class="card-info">
-          <!-- Link around the product title -->
-            <a href={`/product/${slugify(product.productName)}`} class="product-title">
-            {product.productName}
-            </a>
-        </div>
+    <!-- Rolex Watch Section (Left Aligned) -->
+    <div class="item-card-wrapper">
+      <div class="item-card">
+        <a href="/product/rolex">
+          <img class="card-image" src="/assets/test.png" alt="Rolex Watch" />
+        </a>
       </div>
-    ))}
+      <div class="card-info">
+        <h3 class="product-title">ROLEX</h3>
+        <p class="product-description">
+          Rolex was founded in 1902 by Hans Wilsdorf, a watchmaker who strived to create technically advanced watches with precise movements for athletes, explorers, and other individuals on the move.
+        </p>
+        <a href="/product/rolex" class="shop-now">Shop Rolex</a>
+      </div>
+    </div>
+
+    <!-- Richard Mille Watch Section (Right Aligned) -->
+    <div class="item-card-wrapper reverse-layout">
+      <div class="item-card">
+        <a href="/product/richard-mille">
+          <img class="card-image" src="/assets/test.png" alt="Richard Mille Watch" />
+        </a>
+      </div>
+      <div class="card-info">
+        <h3 class="product-title">RICHARD MILLE</h3>
+        <p class="product-description">
+          Made with shock-resistant and lightweight materials found in race cars and durable materials such as NASA-grade titanium. No other watch is quite like a Richard Mille.
+        </p>
+        <a href="/product/richard-mille" class="shop-now">Shop Richard Mille</a>
+      </div>
+    </div>
+
+    <!-- Panerai Watch Section (Left Aligned) -->
+    <div class="item-card-wrapper">
+      <div class="item-card">
+        <a href="/product/panerai">
+          <img class="card-image" src="/assets/test.png" alt="Panerai Watch" />
+        </a>
+      </div>
+      <div class="card-info">
+        <h3 class="product-title">PANERAI SUBMERSIBLE</h3>
+        <p class="product-description">
+          This is a unique timepiece known for its elegance and functionality, offering a timeless design for enthusiasts who value craftsmanship.
+        </p>
+        <a href="/product/panerai" class="shop-now">Shop Panerai</a>
+      </div>
+    </div>
   </div>
 </section>
 
 <style>
-/* Add your existing styles here */
 .whats-new-section {
-  color: #000;
-  padding: 40px 0;
-  text-align: center;
-}
-
-.whats-new-section h2 {
-  font-size: 2.5rem;
-  font-weight: bold;
-  margin-bottom: 40px;
-  color: #f1c40f;
+  color: #fff;
+  padding: 100px;
+  background-color: #000;
+  display: flex;
+  justify-content: center ;
 }
 
 .new-items {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 100px;
+  max-width: 1250px;
+  width: 100%;
 }
 
+/* Left-aligned layout */
 .item-card-wrapper {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 40px;
-  width: 100%;
-  padding: 20px;
+  gap: 50px;
 }
 
-.reverse-layout {
+/* Right-aligned layout */
+.item-card-wrapper.reverse-layout {
   flex-direction: row-reverse;
 }
 
@@ -67,54 +82,71 @@ const products = watchesData.products;
   flex: 1;
   max-width: 50%;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.item-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  
 }
 
 .card-image {
-  width: 100%;
-  height: 100%;
+  width: 110%;
   object-fit: cover;
+  border-radius: 4px;
 }
 
 .card-info {
-  flex: 1;
-  max-width: 50%;
-  text-align: left;
-  padding: 20px;
+  fflex: 2; 
+  max-width: 70%;
+  color: #fff;
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: -33%;
 }
 
 .product-title {
-  font-size: 1.5rem;
+  font-size: 2.8rem;
   font-weight: bold;
-  color: #000;
   margin-bottom: 10px;
+  text-transform: uppercase;
+  color: #fff;
 }
 
 .product-description {
-  color: #000;
-}
-
-.product-price {
+  color: #ddd;
   font-size: 1.2rem;
-  font-weight: bold;
-  color: #f1c40f;
-  margin-bottom: 10px;
+  line-height: 1.8;
+  max-width: 500px;
+  margin-bottom: 20px;
 }
 
 .shop-now {
-  text-decoration: none;
-  color: #f1c40f;
-  font-size: 1rem;
+  display: inline-block;
+  font-size: 1.1rem;
   font-weight: bold;
+  color: #f1c40f;
+  text-decoration: none;
+  border-bottom: 1px solid #f1c40f;
+  padding-bottom: 2px;
+  transition: color 0.3s ease, border-color 0.3s ease;
 }
 
 .shop-now:hover {
-  text-decoration: underline;
+  color: #fff;
+  border-color: #fff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .item-card-wrapper {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .product-title {
+    font-size: 2rem;
+  }
+
+  .product-description {
+    font-size: 1rem;
+  }
 }
 </style>

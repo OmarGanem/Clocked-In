@@ -165,48 +165,48 @@
     }
 
     // Show the appropriate slide with smooth transition
-    function showSlides(n) {
-      const slides = document.getElementsByClassName("mySlides");
+    function showSlides(n: number): void {
+  const slides = document.getElementsByClassName("mySlides") as HTMLCollectionOf<HTMLElement>;
 
-      // Reset slideIndex for infinite loop
-      slideIndex = (n >= slides.length) ? 0 : n;
-      slideIndex = (n < 0) ? slides.length - 1 : slideIndex;
+  // Reset slideIndex for infinite loop
+  slideIndex = (n >= slides.length) ? 0 : n;
+  slideIndex = (n < 0) ? slides.length - 1 : slideIndex;
 
-      // Hide all slides by removing 'active-slide' class
-      for (let i = 0; i < slides.length; i++) {
-        slides[i].classList.remove("active-slide");
+  // Hide all slides by removing 'active-slide' class
+  for (let i = 0; i < slides.length; i++) {
+    slides[i].classList.remove("active-slide");
 
-        // Reset animations for text and button
-        const content = slides[i].querySelector(".slide-content");
-        const button = slides[i].querySelector(".view-all-button");
-        if (content && button) {
-          content.classList.remove("fade-in");
-          button.classList.remove("fade-in");
-        }
-      }
-
-      // Display the current slide with fade-in effect
-      slides[slideIndex].classList.add("active-slide");
-
-      // Special handling to remove flash when moving from last to first slide
-      if (slideIndex === 0) {
-        slides[slideIndex].style.transition = "none"; // Remove transition for the first slide
-        setTimeout(() => {
-          slides[slideIndex].style.transition = ""; // Reapply transition after the first show
-        }, 100); // Short timeout to re-enable transition
-      }
-
-      // Trigger fade-in animation for text and button
-      const activeSlide = slides[slideIndex];
-      const activeContent = activeSlide.querySelector(".slide-content");
-      const activeButton = activeSlide.querySelector(".view-all-button");
-      if (activeContent && activeButton) {
-        setTimeout(() => {
-          activeContent.classList.add("fade-in");
-          activeButton.classList.add("fade-in");
-        }, 100); // Delay to ensure smooth animation on slide change
-      }
+    // Reset animations for text and button
+    const content = slides[i].querySelector(".slide-content");
+    const button = slides[i].querySelector(".view-all-button");
+    if (content && button) {
+      content.classList.remove("fade-in");
+      button.classList.remove("fade-in");
     }
+  }
+
+  // Display the current slide with fade-in effect
+  slides[slideIndex].classList.add("active-slide");
+
+  // Special handling to remove flash when moving from last to first slide
+  if (slideIndex === 0) {
+    slides[slideIndex].style.transition = "none"; // Remove transition for the first slide
+    setTimeout(() => {
+      slides[slideIndex].style.transition = ""; // Reapply transition after the first show
+    }, 100); // Short timeout to re-enable transition
+  }
+
+  // Trigger fade-in animation for text and button
+  const activeSlide = slides[slideIndex];
+  const activeContent = activeSlide.querySelector(".slide-content");
+  const activeButton = activeSlide.querySelector(".view-all-button");
+  if (activeContent && activeButton) {
+    setTimeout(() => {
+      activeContent.classList.add("fade-in");
+      activeButton.classList.add("fade-in");
+    }, 100); // Delay to ensure smooth animation on slide change
+  }
+}
   </script>
 </body>
 </html>

@@ -21,14 +21,23 @@ const testimonials = [
 ];
 ---
 
-<section class="py-16 sm:py-20">
+<section class="py-16 sm:py-20" style="background-color: #000;">
   <div class="v mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8">
     <div class="flex flex-col items-center gap-12 lg:gap-20">
-      <h2 class="mx-auto max-w-xl text-center text-3xl font-medium tracking-tight sm:text-4xl text-black">
+      <h2 class="mx-auto max-w-xl text-center text-3xl font-medium tracking-tight sm:text-4xl text-white">
         Reviews
       </h2>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d46507.35959263732!2d-86.25652699999999!3d43.23654005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb8da619a3373c21%3A0xc0c39611677a1318!2sClocked%20In%20Jewelry%20%26%20Watches!5e0!3m2!1sen!2smx!4v1730512782640!5m2!1sen!2smx" 
+      width="600" 
+      height="450" 
+      style="border:0;" 
+      allowfullscreen="" 
+      loading="lazy" 
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+
       <div
-        class="divide-primary-900/10 dark:divide-primary-300/10 grid divide-y lg:grid-cols-3 lg:divide-x lg:divide-y-0"
+        class="divide-white grid divide-y lg:grid-cols-3 lg:divide-x lg:divide-y-0"
       >
         {
           testimonials.map((testimonial) => (
@@ -36,7 +45,7 @@ const testimonials = [
               <div class="flex flex-row gap-2">
                 {[...Array(5)].map(() => (
                   <svg
-                    class="text-primary-600 dark:text-primary-400 h-6 w-6"
+                    class="text-primary-400 h-6 w-6"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
                     fill="currentColor"
@@ -46,13 +55,13 @@ const testimonials = [
                   </svg>
                 ))}
               </div>
-              <blockquote class="text-black text-center text-lg italic leading-loose">
+              <blockquote class="text-white text-center text-lg italic leading-loose">
                 <p>{testimonial.message}</p>
               </blockquote>
               <figcaption class="flex flex-col gap-4">
                 <img class="mx-auto h-8 w-8 rounded-full" src={testimonial.image} alt="" />
                 <div class="text-center">
-                  <div class="text-base font-medium text-black">{testimonial.name}</div>
+                  <div class="text-base font-medium text-white">{testimonial.name}</div>
                 </div>
               </figcaption>
             </figure>
