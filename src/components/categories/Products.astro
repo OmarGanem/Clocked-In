@@ -1,9 +1,7 @@
 ---
 import { slugify } from '../../utils/slugify';
-// Import the JSON data 
 import productsData from '../../products.json';
 
-// Define TypeScript interface for products
 interface Product {
   productName: string;
   category: string;
@@ -11,153 +9,49 @@ interface Product {
   image: string;
 }
 
-// Use productsData.products with the type Product[]
 const products: Product[] = productsData.products;
 ---
-<section class="product-page">
-    <!-- Sidebar Filter Section -->
-    <aside class="filter-sidebar">
-      <div class="filter-buttons">
-        <button class="filter-button" data-filter="all">All</button>
-        <button class="filter-button" data-filter="Rolex">Rolex</button>
-        <button class="filter-button" data-filter="Richard Mille">Richard Mille</button>
-        <button class="filter-button" data-filter="Panerai">Panerai</button>
-        <!-- Add other categories here -->
-      </div>
-  
-      <!-- Search Input -->
-      <div id="search-container">
-        <input type="text" id="search-input" placeholder="Search product name here...">
-        <button id="search">Search</button>
-      </div>
-    </aside>
-  
-    <!-- Main Product Section -->
-    <section class="whats-new-section">
-      <!-- Product List -->
-      <div class="new-items" id="products-container">
-        {products.map((product) => (
-          <div class="product-item" data-category={product.category} data-name={product.productName}>
-            <a href={`/products/${slugify(product.productName)}`}>
-              <img class="product-image" src={product.image} alt={product.productName} />
-            </a>
-            <div class="product-info">
-              <h3 class="product-title">{product.productName}</h3>
-              <p class="product-price">£{product.price}</p>
-            </div>
+
+<section class="flex">
+  <!-- Sidebar Filter Section -->
+  <aside class="w-64 p-6 bg-gray-100 border-r border-gray-300">
+    <!-- Filter Buttons -->
+    <div class="flex flex-col gap-4 mb-6">
+      <button class="px-4 py-2 text-left text-white bg-gray-800 rounded transition duration-300 hover:bg-gray-600" data-filter="all">All</button>
+      <button class="px-4 py-2 text-left text-white bg-gray-800 rounded transition duration-300 hover:bg-gray-600" data-filter="Rolex">Rolex</button>
+      <button class="px-4 py-2 text-left text-white bg-gray-800 rounded transition duration-300 hover:bg-gray-600" data-filter="Richard Mille">Richard Mille</button>
+      <button class="px-4 py-2 text-left text-white bg-gray-800 rounded transition duration-300 hover:bg-gray-600" data-filter="Panerai">Panerai</button>
+      <!-- Add other categories here -->
+    </div>
+
+    <!-- Search Input -->
+    <div id="search-container" class="mt-6">
+      <input
+        type="text"
+        id="search-input"
+        placeholder="Search product name here..."
+        class="w-full px-3 py-2 mb-3 border border-gray-300 rounded"
+      />
+      <button id="search" class="w-full px-3 py-2 text-white bg-blue-600 rounded hover:bg-blue-500">Search</button>
+    </div>
+  </aside>
+
+  <!-- Main Product Section -->
+  <section class="flex-1 p-8 bg-white">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 max-w-6xl mx-auto">
+      {products.map((product) => (
+        <div class="border rounded-lg overflow-hidden shadow hover:shadow-lg transition-shadow duration-300" data-category={product.category} data-name={product.productName}>
+          <a href={`/products/${slugify(product.productName)}`}>
+            <img class="w-full h-64 object-cover transition-transform duration-300 hover:scale-105" src={product.image} alt={product.productName} />
+          </a>
+          <div class="p-4">
+            <h3 class="text-lg font-semibold text-gray-800">{product.productName}</h3>
+            <p class="text-gray-600">${product.price}</p>
           </div>
-        ))}
-      </div>
-    </section>
+        </div>
+      ))}
+    </div>
   </section>
-  
-  <script src="/src/scripts/filter.js" type="module"></script>
-  
+</section>
 
-<style>
-/* Page Layout */
-.product-page {
-  display: flex;
-}
-
-/* Sidebar Filter Styling */
-.filter-sidebar {
-  width: 250px;
-  padding: 20px;
-  background-color: #f8f9fa;
-  border-right: 1px solid #ddd;
-}
-
-.filter-sidebar h3 {
-  font-size: 1.2rem;
-  margin-bottom: 15px;
-  color: #333;
-}
-
-/* Filter Buttons - Sidebar Style */
-.filter-buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.filter-button {
-  padding: 10px;
-  background-color: #333;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  text-align: left;
-}
-
-.filter-button:hover {
-  background-color: #555;
-}
-
-/* Search Container in Sidebar */
-#search-container {
-  margin-top: 20px;
-}
-
-#search-input {
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 8px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-/* Main Product Section */
-.whats-new-section {
-  flex: 1;
-  padding: 60px 20px;
-  background-color: #ffffff;
-  text-align: center;
-}
-
-/* Product Grid Layout */
-.new-items {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 30px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* Product Item Styling */
-.product-item {
-  text-align: center;
-}
-
-.product-image {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  transition: transform 0.3s ease;
-  border-radius: 4px;
-}
-
-.product-image:hover {
-  transform: scale(1.05);
-}
-
-/* Product Title and Price */
-.product-info {
-  margin-top: 10px;
-}
-
-.product-title {
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #333;
-  margin: 5px 0;
-}
-
-.product-price {
-  font-size: 1rem;
-  color: #666;
-}
-
-</style>
+<script type="module" src="/src/scripts/filter.js"></script>
