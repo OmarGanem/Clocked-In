@@ -10,43 +10,71 @@ interface Product {
 }
 
 const products: Product[] = productsData.products;
+
+// Example brands and counts for filter section
+const brands = [
+  { name: 'A. Lange & Sohne', count: 1 },
+  { name: 'Audemars Piguet', count: 23 },
+  { name: 'Breitling', count: 8 },
+  { name: 'Cartier', count: 5 },
+  { name: 'Omega', count: 23 },
+  { name: 'Rolex', count: 78 },
+];
 ---
 
-<section class="flex">
+<section class="flex max-w-screen-xl mx-auto px-4">
   <!-- Sidebar Filter Section -->
-  <aside class="w-64 p-6 bg-gray-100 border-r border-gray-300">
-    <!-- Filter Buttons -->
-    <div class="flex flex-col gap-4 mb-6">
-      <button class="px-4 py-2 text-left text-gray-700 bg-gray-200 rounded hover:bg-gray-300 transition duration-300" data-filter="all">All</button>
-      <button class="px-4 py-2 text-left text-gray-700 bg-gray-200 rounded hover:bg-gray-300 transition duration-300" data-filter="Rolex">Rolex</button>
-      <button class="px-4 py-2 text-left text-gray-700 bg-gray-200 rounded hover:bg-gray-300 transition duration-300" data-filter="Richard Mille">Richard Mille</button>
-      <button class="px-4 py-2 text-left text-gray-700 bg-gray-200 rounded hover:bg-gray-300 transition duration-300" data-filter="Panerai">Panerai</button>
+  <aside class="w-56 p-6 bg-gray-100 border-r border-gray-300">
+    <div class="mb-8">
+      <h2 class="text-lg font-semibold text-gray-800 mb-4">Price</h2>
+      <div class="flex items-center space-x-2">
+        <input type="number" placeholder="£0" class="w-1/3 p-2 border border-gray-300 rounded" />
+        <span class="text-gray-500">to</span>
+        <input type="number" placeholder="£250" class="w-1/3 p-2 border border-gray-300 rounded" />
+      </div>
+      <input type="range" min="0" max="250" class="w-full mt-4" />
     </div>
 
-    <!-- Search Input -->
+    <div class="mb-8">
+      <h2 class="text-lg font-semibold text-gray-800 mb-4">Brand</h2>
+      <ul class="space-y-2">
+        <li class="filter-button cursor-pointer text-gray-700 hover:text-gray-900" data-filter="all">All</li>
+        {brands.map((brand) => (
+          <li class="filter-button flex justify-between cursor-pointer text-gray-700 hover:text-gray-900" data-filter={brand.name}>
+            <span>{brand.name}</span>
+            <span>({brand.count})</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
     <div id="search-container" class="mt-6">
-      <input
-        type="text"
-        id="search-input"
-        placeholder="Search product name here..."
-        class="w-full px-3 py-2 mb-3 border border-gray-300 rounded"
-      />
-      <button id="search" class="w-full px-3 py-2 text-black bg-blue-600 rounded hover:bg-blue-500">Search</button>
+      <input type="text" id="search-input" placeholder="Search product name here..." class="w-full p-2 border border-gray-300 rounded" />
+      <button id="search" class="mt-2 w-full p-2 bg-gray-700 text-black rounded">Search</button>
     </div>
   </aside>
 
   <!-- Main Product Section -->
-  <section class="flex-1 p-8 bg-white">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 max-w-6xl mx-auto">
+  <section class="flex-1 p-6 bg-white">
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="text-xl font-semibold text-gray-700">196 Products</h2>
+      <select class="p-2 border border-gray-300 rounded">
+        <option>Sort by</option>
+        <option>Price: Low to High</option>
+        <option>Price: High to Low</option>
+        <option>Newest Arrivals</option>
+      </select>
+    </div>
+
+    <div id="products-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 max-w-6xl mx-auto">
       {products.map((product) => (
-        <div class="bg-white  overflow-hidden transition-transform transform hover:scale-105" data-category={product.category} data-name={product.productName}>
-          <a href={`/products/${slugify(product.productName)}`}>
+        <div class="item-card-wrapper bg-white rounded-lg shadow overflow-hidden transition-transform transform hover:scale-105" data-category={product.category}>
+          <a href={`/product/${slugify(product.productName)}`}>
             <img class="w-full h-64 object-cover" src={product.image} alt={product.productName} />
           </a>
-          <div class="p-4">
-            <span class="text-sm text-gray-500 uppercase">Brand</span>
-            <h3 class="text-lg font-semibold text-gray-800 mt-1">{product.productName}</h3>
-            <p class="text-xl font-bold text-gray-900 mt-2">£{product.price}</p>
+          <div class="p-4 text-center">
+            <h3 class="product-title text-lg font-semibold text-gray-800">{product.productName}</h3>
+            <p class="text-gray-600">${parseFloat(product.price).toLocaleString('en-GB', { minimumFractionDigits: 2 })}</p>
           </div>
         </div>
       ))}
@@ -54,5 +82,5 @@ const products: Product[] = productsData.products;
   </section>
 </section>
 
-
+<!-- Link to the filter.js script -->
 <script type="module" src="/src/scripts/filter.js"></script>

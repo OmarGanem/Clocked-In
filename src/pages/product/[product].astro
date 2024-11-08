@@ -1,9 +1,8 @@
 ---
-import watchesData from "../../products.json"; // Import the JSON data
-import { slugify } from "../../utils/slugify"; // Import the slugify function
-import Layout from '../../layouts/Layout.astro';
+import { slugify } from "../../utils/slugify";
+import productsData from "../../products.json";
+import Layout from "../../layouts/Layout.astro";
 
-// Define a type for a Product
 interface Product {
   productName: string;
   category: string;
@@ -11,115 +10,62 @@ interface Product {
   year?: string;
   image: string;
   description: string;
-  sku?: string; // Add SKU if you have it in the JSON
+  sku?: string;
 }
 
 // Implementing getStaticPaths to create dynamic routes
 export async function getStaticPaths() {
-  return watchesData.products.map((product: Product) => ({
-    params: { product: slugify(product.productName) }
+  const paths = (productsData.products as Product[]).map((product) => ({
+    params: { product: slugify(product.productName) },
   }));
+  return paths;
 }
 
 // Access the dynamic slug (product name) from URL
 const { product } = Astro.params;
 
 // Find the selected product based on the slug
-const selectedProduct = watchesData.products.find(
-  (p: Product) => slugify(p.productName) === product
-);
+const selectedProduct = productsData.products.find((p: any) => {
+  return slugify((p as Product).productName) === product;
+}) as Product | undefined;
 
 if (!selectedProduct) {
   throw new Error(`Product not found: ${product}`);
 }
 ---
-<Layout description="Page not found. Please check the URL in the address bar and try again."
-title="Not found · Clocked In">
-  <section class="product-page">
+
+<Layout description={`Details for ${selectedProduct.productName}`} title={`${selectedProduct.productName} · Clocked In`}>
+  <section class="flex w-full mx-auto p-8 text-gray-800">
   
-    <!-- Left section: Image gallery -->
-    <div class="product-gallery">
-      <img class="gallery-image" src={selectedProduct.image} alt={selectedProduct.productName} />
-      <img class="gallery-image" src={selectedProduct.image} alt={selectedProduct.productName} />
-      <img class="gallery-image" src={selectedProduct.image} alt={selectedProduct.productName} />
-      <img class="gallery-image" src={selectedProduct.image} alt={selectedProduct.productName} />
+    <!-- Left section: Image gallery with no constraints on width, using full space -->
+    <div class="flex-1 grid grid-cols-2 gap-6">
+      <img class="w-full h-auto shadow-lg object-cover" src={selectedProduct.image} alt={selectedProduct.productName} />
+      <img class="w-full h-auto shadow-lg object-cover" src={selectedProduct.image} alt={selectedProduct.productName} />
+      <img class="w-full h-auto shadow-lg object-cover" src={selectedProduct.image} alt={selectedProduct.productName} />
+      <img class="w-full h-auto shadow-lg object-cover" src={selectedProduct.image} alt={selectedProduct.productName} />
     </div>
   
-    <!-- Right section: Product details -->
-    <div class="product-details">
-      <h1 class="product-title">{selectedProduct.productName}</h1>
-      <p class="product-sku">SKU: {selectedProduct.sku || "N/A"}</p>
-      <p class="product-price">Price: ${selectedProduct.price}</p>
-      <p class="product-description">{selectedProduct.description}</p>
+    <!-- Right section: Product details with smaller width -->
+    <div class="w-[30%] flex flex-col space-y-6 pl-8">
+      <h1 class="text-5xl font-bold uppercase">{selectedProduct.productName}</h1>
+      <p class="text-lg text-gray-600">SKU: {selectedProduct.sku || "N/A"}</p>
+      <p class="text-3xl font-bold text-gray-900">${parseFloat(selectedProduct.price).toLocaleString('en-GB', { minimumFractionDigits: 2 })}</p>
+      
+      <p class="text-md text-gray-700 leading-relaxed">{selectedProduct.description}</p>
 
-          <div class="product-specifications">
-            <p><strong>Year:</strong> {selectedProduct.year || "N/A"}</p>
-            <p><strong>Category:</strong> {selectedProduct.category}</p>
-            <p><strong>Condition:</strong> Excellent</p>
-            <p><strong>Box:</strong> Yes</p>
-            <p><strong>Papers:</strong> Yes</p>
-            <p><strong>Bezel:</strong> Ceramic</p>
-            <p><strong>Case:</strong> 40mm, Steel</p>
-            <p><strong>Movement:</strong> Automatic</p>
-          </div>
+      <div class="mt-6 grid grid-cols-2 gap-4 text-lg text-gray-600">
+        <p><span class="font-semibold text-gray-800">Year:</span> {selectedProduct.year || "N/A"}</p>
+        <p><span class="font-semibold text-gray-800">Category:</span> {selectedProduct.category}</p>
+        <p><span class="font-semibold text-gray-800">Condition:</span> Excellent</p>
+        <p><span class="font-semibold text-gray-800">Box:</span> Yes</p>
+        <p><span class="font-semibold text-gray-800">Papers:</span> Yes</p>
+        <p><span class="font-semibold text-gray-800">Bezel:</span> Ceramic</p>
+        <p><span class="font-semibold text-gray-800">Case:</span> 40mm, Steel</p>
+        <p><span class="font-semibold text-gray-800">Movement:</span> Automatic</p>
       </div>
+      <button class="mt-4 py-3 px-6 bg-blue-600 text-black font-semibold rounded-lg hover:bg-blue-700 transition">
+        Inquire
+      </button>
+    </div>
   </section>
-
-  <style>
-    .product-page {
-      display: flex;
-      flex-wrap: wrap;
-      max-width: 1200px;
-      margin: 0 auto;
-      gap: 2rem;
-      padding: 2rem;
-      color: #333;
-    }
-
-    .product-gallery {
-      flex: 1;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr); /* Two columns */
-      gap: 1rem;
-      max-width: 400px;
-    }
-
-    .gallery-image {
-      width: 100%;
-      height: auto;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      object-fit: cover;
-    }
-
-    .product-details {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      padding: 1rem;
-    }
-
-    .product-title {
-      font-size: 2rem;
-      font-weight: bold;
-      margin-bottom: 0.5rem;
-    }
-
-    .product-sku, .product-price, .product-description {
-      font-size: 1.2rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .product-specifications {
-      margin-top: 1rem;
-    }
-
-    .product-specifications p {
-      margin: 0.3rem 0;
-    }
-
-    .product-specifications p strong {
-      color: #f1c40f;
-    }
-  </style>
 </Layout>

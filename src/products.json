@@ -7,7 +7,7 @@
       "sku": "120910921",
       "year": "2021",
       "image": "/assets/watch04.jpg",
-      "description": "Rolex was founded in 1905 by Hans Wilsdorf and Alfred Davis in London and later moved to Geneva. It gained fame for innovations like the first waterproof watch, the Oyster, in 1926, and the self-winding Perpetual rotor in 1931. Known for iconic models like the Submariner and Daytona, Rolex has become a symbol of luxury and precision in watchmaking"
+      "description": "Rolex was founded in 1905 by Hans Wilsdorf and Alfred Davis in London and later moved to Geneva. It gained fame for innovations like the first waterproof watch, the Oyster, in 1926, and the self-winding Perpetual rotor in 1931. Known for iconic models like the Submariner and Daytona, Rolex has become a symbol of luxury and precision in watchmaking."
     },
     {
       "productName": "Patek Philippe Aquanaut 5167/1A",
@@ -21,6 +21,7 @@
       "productName": "Panerai Submersible",
       "category": "Panerai",
       "price": "150",
+      "sku": "120910921",
       "year": "2020",
       "image": "/assets/watch08.jpg",
       "description": "Panerai Submersible watches are built for deep dives, with advanced water resistance and a rugged design."
@@ -29,32 +30,46 @@
       "productName": "Rolex GMT Master II",
       "category": "Rolex",
       "price": "100",
+      "sku": "120910922",
       "year": "2000",
-      "image": "./assets/watch01.jpg"
+      "image": "/assets/watch01.jpg",
+      "description": "This Rolex GMT Master II features the iconic rotating bezel and dual time zone functionality, a favorite among travelers since its introduction."
     },
     {
       "productName": "Rolex Yacht-Master",
       "category": "Rolex",
       "price": "100",
-      "image": "./assets/watch02.jpg"
+      "sku": "120910923",
+      "year": "2018",
+      "image": "/assets/watch02.jpg",
+      "description": "The Rolex Yacht-Master is designed for sailing enthusiasts, with a bidirectional bezel and water resistance, blending luxury with sportiness."
     },
     {
       "productName": "Rolex Sea-Dweller",
       "category": "Rolex",
       "price": "100",
-      "image": "./assets/watch03.jpg"
+      "sku": "120910924",
+      "year": "2015",
+      "image": "/assets/watch03.jpg",
+      "description": "Rolex Sea-Dweller is a legendary diver’s watch, engineered to withstand great depths, making it a professional tool for underwater exploration."
     },
     {
       "productName": "Rolex Submariner ‘Kermit’ 16610LV",
       "category": "Rolex",
       "price": "100",
-      "image": "./assets/watch05.jpg"
+      "sku": "120910925",
+      "year": "2003",
+      "image": "/assets/watch05.jpg",
+      "description": "The Rolex Submariner ‘Kermit’ with its green bezel is a collector's favorite, celebrating the 50th anniversary of the iconic Submariner."
     },
     {
       "productName": "Rolex GMT Master II ‘Coke’ 16710",
       "category": "Rolex",
       "price": "100",
-      "image": "./assets/watch06.jpg"
+      "sku": "120910926",
+      "year": "2007",
+      "image": "/assets/watch06.jpg",
+      "description": "The Rolex GMT Master II ‘Coke’ features the signature red and black bezel, a favorite among collectors for its unique style and functionality."
     }
   ]
 }
