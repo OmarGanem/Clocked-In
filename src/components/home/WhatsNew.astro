@@ -1,50 +1,50 @@
 <section class="whats-new-section">
-  <div class="new-items">
-    <!-- Rolex Watch Section (Left Aligned) -->
-    <div class="item-card-wrapper">
-      <div class="item-card">
+  <div class="flex flex-col gap-24 max-w-5xl w-full">
+    <!-- Left Aligned -->
+    <div class="flex gap-12 flex-col md:flex-row">
+      <div class="flex-1 overflow-hidden">
         <a href="/product/rolex">
-          <img class="card-image" src="/assets/test.png" alt="Rolex Watch" />
+          <img class="w-[130%] object-cover transition-transform duration-300 hover:scale-110" src="/assets/test.png" alt="Rolex Watch" />
         </a>
       </div>
-      <div class="card-info">
-        <h3 class="product-title">ROLEX</h3>
-        <p class="product-description">
+      <div class="flex-2 max-w-[70%] text-white py-2 px-5 flex flex-col justify-center mt-[-8%]">
+        <h3 class="text-4xl font-bold mb-2 uppercase">ROLEX</h3>
+        <p class="text-lg text-gray-300 mb-5 leading-relaxed max-w-xl">
           Rolex was founded in 1902 by Hans Wilsdorf, a watchmaker who strived to create technically advanced watches with precise movements for athletes, explorers, and other individuals on the move.
         </p>
-        <a href="/product/rolex" class="shop-now">Shop Rolex</a>
+        <a href="/product/rolex" class="inline-block text-lg font-bold text-yellow-500 border-b border-yellow-500 pb-1 transition-colors duration-300 hover:text-white hover:border-white">Shop Rolex</a>
       </div>
     </div>
 
-    <!-- Richard Mille Watch Section (Right Aligned) -->
-    <div class="item-card-wrapper reverse-layout">
-      <div class="item-card">
+    <!-- Right Aligned -->
+    <div class="flex gap-12 flex-col md:flex-row-reverse">
+      <div class="flex-1 overflow-hidden">
         <a href="/product/richard-mille">
-          <img class="card-image" src="/assets/test.png" alt="Richard Mille Watch" />
+          <img class="w-[130%] object-cover transition-transform duration-300 hover:scale-110" src="/assets/test.png" alt="Richard Mille Watch" />
         </a>
       </div>
-      <div class="card-info">
-        <h3 class="product-title">RICHARD MILLE</h3>
-        <p class="product-description">
+      <div class="flex-2 max-w-[70%] text-white py-2 px-5 flex flex-col justify-center mt-[-8%]">
+        <h3 class="text-4xl font-bold mb-2 uppercase">RICHARD MILLE</h3>
+        <p class="text-lg text-gray-300 mb-5 leading-relaxed max-w-xl">
           Made with shock-resistant and lightweight materials found in race cars and durable materials such as NASA-grade titanium. No other watch is quite like a Richard Mille.
         </p>
-        <a href="/product/richard-mille" class="shop-now">Shop Richard Mille</a>
+        <a href="/product/richard-mille" class="inline-block text-lg font-bold text-yellow-500 border-b border-yellow-500 pb-1 transition-colors duration-300 hover:text-white hover:border-white">Shop Richard Mille</a>
       </div>
     </div>
 
-    <!-- Panerai Watch Section (Left Aligned) -->
-    <div class="item-card-wrapper">
-      <div class="item-card">
+    <!-- Left Aligned -->
+    <div class="flex gap-12 flex-col md:flex-row">
+      <div class="flex-1 overflow-hidden">
         <a href="/product/panerai">
-          <img class="card-image" src="/assets/test.png" alt="Panerai Watch" />
+          <img class="w-[130%] object-cover transition-transform duration-300 hover:scale-110" src="/assets/test.png" alt="Panerai Watch" />
         </a>
       </div>
-      <div class="card-info">
-        <h3 class="product-title">PANERAI SUBMERSIBLE</h3>
-        <p class="product-description">
+      <div class="flex-2 max-w-[70%] text-white py-2 px-5 flex flex-col justify-center mt-[-8%]">
+        <h3 class="text-4xl font-bold mb-2 uppercase">PANERAI SUBMERSIBLE</h3>
+        <p class="text-lg text-gray-300 mb-5 leading-relaxed max-w-xl">
           This is a unique timepiece known for its elegance and functionality, offering a timeless design for enthusiasts who value craftsmanship.
         </p>
-        <a href="/product/panerai" class="shop-now">Shop Panerai</a>
+        <a href="/product/panerai" class="inline-block text-lg font-bold text-yellow-500 border-b border-yellow-500 pb-1 transition-colors duration-300 hover:text-white hover:border-white">Shop Panerai</a>
       </div>
     </div>
   </div>
@@ -53,100 +53,23 @@
 <style>
 .whats-new-section {
   color: #fff;
-  padding: 100px;
+  padding: 100px 0;
   background-color: #000;
   display: flex;
-  justify-content: center ;
-}
-
-.new-items {
-  display: flex;
-  flex-direction: column;
-  gap: 100px;
-  max-width: 1250px;
-  width: 100%;
-}
-
-/* Left-aligned layout */
-.item-card-wrapper {
-  display: flex;
-  gap: 50px;
-}
-
-/* Right-aligned layout */
-.item-card-wrapper.reverse-layout {
-  flex-direction: row-reverse;
-}
-
-.item-card {
-  flex: 1;
-  max-width: 50%;
-  overflow: hidden;
-  
-}
-
-.card-image {
-  width: 110%;
-  object-fit: cover;
-  border-radius: 4px;
-}
-
-.card-info {
-  fflex: 2; 
-  max-width: 70%;
-  color: #fff;
-  padding: 10px 20px;
-  display: flex;
-  flex-direction: column;
   justify-content: center;
-  margin-top: -33%;
 }
 
-.product-title {
-  font-size: 2.8rem;
-  font-weight: bold;
-  margin-bottom: 10px;
-  text-transform: uppercase;
+.whats-new-section h3 {
   color: #fff;
 }
 
-.product-description {
-  color: #ddd;
-  font-size: 1.2rem;
-  line-height: 1.8;
-  max-width: 500px;
-  margin-bottom: 20px;
-}
-
-.shop-now {
-  display: inline-block;
-  font-size: 1.1rem;
-  font-weight: bold;
+.whats-new-section a {
   color: #f1c40f;
-  text-decoration: none;
   border-bottom: 1px solid #f1c40f;
-  padding-bottom: 2px;
-  transition: color 0.3s ease, border-color 0.3s ease;
 }
 
-.shop-now:hover {
+.whats-new-section a:hover {
   color: #fff;
   border-color: #fff;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .item-card-wrapper {
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .product-title {
-    font-size: 2rem;
-  }
-
-  .product-description {
-    font-size: 1rem;
-  }
 }
 </style>

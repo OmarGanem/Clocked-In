@@ -1,4 +1,4 @@
-// Wait for DOM to load
+
 document.addEventListener('DOMContentLoaded', () => {
     const productsContainer = document.getElementById('products-container');
     const productCards = productsContainer.querySelectorAll('.item-card-wrapper');
@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
       productCards.forEach(card => {
         const productCategory = card.getAttribute('data-category');
         if (category === 'all' || productCategory === category) {
-          card.style.display = 'flex'; // Flex layout for visible cards
+          card.style.display = 'flex'; 
         } else {
           card.style.display = 'none'; // Hide non-matching cards
         }

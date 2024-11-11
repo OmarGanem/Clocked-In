@@ -1,81 +1,9 @@
 <!-- Hero Section -->
-<section class="hero-section">
-  <div class="hero-overlay">
-    <h1 class="hero-title">LUXURY WATCHES</h1>
-    <p class="hero-text">
+<section class="relative w-full h-[60vh] bg-cover bg-center flex justify-center items-center text-white text-center" style="background-image: url('/assets/watches.webp');">
+  <div class="p-5 max-w-3xl">
+    <h1 class="text-4xl font-bold mb-2 md:text-3xl sm:text-2xl">OUR WATCHES</h1>
+    <p class="text-lg leading-relaxed md:text-base sm:text-sm mb-4">
       A collection of all the luxury watches we have on offer for immediate purchase. We provide a full year's warranty where manufacturer's warranty has expired, as well as fully insured, free shipping within 48hrs of purchase (Monday-Friday: 9am-5pm GMT).
     </p>
   </div>
 </section>
-
-<style>
-/* Full-Screen Hero Section */
-.hero-section {
-  position: relative;
-  width: 100%;
-  height: 60vh; /* Full viewport height */
-  background-image: url('/assets/watches.webp'); /* Replace with actual image path */
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  text-align: center;
-  margin: 0;
-  padding: 0;
-}
-
-.hero-overlay {
-  padding: 20px;
-  max-width: 800px;
-}
-
-.hero-title {
-  font-size: 2.5rem;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.hero-text {
-  font-size: 1.2rem;
-  line-height: 1.6;
-  margin-bottom: 15px;
-}
-
-.hero-note {
-  font-size: 1rem;
-  color: #f1c40f;
-}
-
-.hero-note a {
-  color: #f1c40f;
-  text-decoration: underline;
-}
-
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .hero-title {
-    font-size: 2rem;
-  }
-  .hero-text {
-    font-size: 1rem;
-  }
-  .new-items {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero-title {
-    font-size: 1.5rem;
-  }
-  .hero-text {
-    font-size: 0.9rem;
-  }
-  .new-items {
-    grid-template-columns: 1fr;
-  }
-}
-</style>

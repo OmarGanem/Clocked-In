@@ -37,7 +37,7 @@ if (!selectedProduct) {
 <Layout description={`Details for ${selectedProduct.productName}`} title={`${selectedProduct.productName} · Clocked In`}>
   <section class="flex w-full mx-auto p-8 text-gray-800">
   
-    <!-- Left section: Image gallery with no constraints on width, using full space -->
+    <!-- Left section -->
     <div class="flex-1 grid grid-cols-2 gap-6">
       <img class="w-full h-auto shadow-lg object-cover" src={selectedProduct.image} alt={selectedProduct.productName} />
       <img class="w-full h-auto shadow-lg object-cover" src={selectedProduct.image} alt={selectedProduct.productName} />
@@ -45,7 +45,7 @@ if (!selectedProduct) {
       <img class="w-full h-auto shadow-lg object-cover" src={selectedProduct.image} alt={selectedProduct.productName} />
     </div>
   
-    <!-- Right section: Product details with smaller width -->
+    <!-- Right section -->
     <div class="w-[30%] flex flex-col space-y-6 pl-8">
       <h1 class="text-5xl font-bold uppercase">{selectedProduct.productName}</h1>
       <p class="text-lg text-gray-600">SKU: {selectedProduct.sku || "N/A"}</p>
