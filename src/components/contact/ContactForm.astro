@@ -5,12 +5,12 @@ import { ViewTransitions } from 'astro:transitions';
 ---
 
 <!DOCTYPE html>
-<html lang="en" x-cloak x-data :class="{ 'dark': $store.theme.isDark }">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/Clocked_In_Logo.PNG" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/Clocked_In_Logo.PNG" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/Clocked_In_Logo.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/Clocked_In_Logo.svg" />
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="generator" content={Astro.generator} />
     <ViewTransitions />
@@ -45,7 +45,7 @@ import { ViewTransitions } from 'astro:transitions';
                 />
               </div>
 
-              <!-- Email input (required by Formspree) -->
+              <!-- Email input -->
               <div>
                 <label for="email" class="sr-only">Email</label>
                 <input
@@ -59,7 +59,7 @@ import { ViewTransitions } from 'astro:transitions';
                 />
               </div>
 
-              <!-- Questions (treated as message in Formspree) -->
+              <!-- Questions  -->
               <div>
                 <label for="questions" class="sr-only">Comment</label>
                 <textarea
