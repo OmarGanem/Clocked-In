@@ -1,0 +1,36 @@
+---
+const sourceWatchImage = "/assets/test.png";
+const sellWatchImage = "/assets/test.png";
+---
+
+<section class="flex justify-center py-12 px-5">
+  <div class="flex gap-10 max-w-5xl w-full flex-col md:flex-row">
+    <!-- Source a Watch -->
+    <div class="flex-1 text-center">
+      <a href="/contact">
+        <img src={sourceWatchImage} alt="Source a Watch" class="w-full h-auto max-w-md rounded-lg object-cover mx-auto transition-transform duration-200 hover:scale-105" />
+      </a>
+      <h2 class="text-2xl font-bold mt-5">
+        <a href="/contact" class="text-gray-800 hover:underline">Source a Watch</a>
+      </h2>
+      <p class="text-base text-gray-600 mt-2 leading-relaxed">
+        With over 20 years of combined experience, we have sourced some of the rarest and most
+        exclusive watches. Our commitment to quality and authenticity ensures you get only the best.
+      </p>
+    </div>
+
+    <!-- Sell Your Watch -->
+    <div class="flex-1 text-center">
+      <a href='/sellform'>
+        <img src={sellWatchImage} alt="Sell Your Watch" class="w-full h-auto max-w-md rounded-lg object-cover mx-auto transition-transform duration-200 hover:scale-105" />
+      </a>
+      <h2 class="text-2xl font-bold mt-5">
+        <a href='/sellform' class="text-gray-800 hover:underline">Sell Your Watch</a>
+      </h2>
+      <p class="text-base text-gray-600 mt-2 leading-relaxed">
+        Integrity above all else, we know the watch market inside out, and our experts will keep you
+        informed every step of the way. Get the best value for your luxury timepiece.
+      </p>
+    </div>
+  </div>
+</section>

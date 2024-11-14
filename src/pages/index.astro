@@ -4,7 +4,7 @@ import Hero from '../components/home/Hero.astro';
 import Testimonials from '../components/home/Testimonials.astro';
 import Layout from '../layouts/Layout.astro';
 import Products from '../components/home/WhatsNew.astro';
-import SourceSellSection from '../components/home/SourceSellSection.jsx';
+import SourceSellSection from '../components/home/SourceSellSection.astro';
 ---
 
 <Layout
@@ -12,7 +12,7 @@ import SourceSellSection from '../components/home/SourceSellSection.jsx';
   title="Clocked In"
 >
   <Hero />
-  <SourceSellSection client:load/>
+  <SourceSellSection />
   <Products />
   <Expertise />
   <Testimonials />
