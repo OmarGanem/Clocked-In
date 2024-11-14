@@ -3,6 +3,7 @@ import { slugify } from "../../utils/slugify";
 import productsData from "../../products.json";
 import Layout from "../../layouts/Layout.astro";
 
+// Define the Product interface
 interface Product {
   productName: string;
   category: string;
@@ -32,22 +33,25 @@ const selectedProduct = productsData.products.find((p: any) => {
 if (!selectedProduct) {
   throw new Error(`Product not found: ${product}`);
 }
+
+// Define productName using the selected product's data
+const productName = selectedProduct.productName;
 ---
 
-<Layout description={`Details for ${selectedProduct.productName}`} title={`${selectedProduct.productName} · Clocked In`}>
+<Layout description={`Details for ${productName}`} title={`${productName} · Clocked In`}>
   <section class="flex w-full mx-auto p-8 text-gray-800">
   
     <!-- Left section -->
     <div class="flex-1 grid grid-cols-2 gap-6">
-      <img class="w-full h-auto shadow-lg object-cover" src={selectedProduct.image} alt={selectedProduct.productName} />
-      <img class="w-full h-auto shadow-lg object-cover" src={selectedProduct.image} alt={selectedProduct.productName} />
-      <img class="w-full h-auto shadow-lg object-cover" src={selectedProduct.image} alt={selectedProduct.productName} />
-      <img class="w-full h-auto shadow-lg object-cover" src={selectedProduct.image} alt={selectedProduct.productName} />
+      <img class="w-full h-auto shadow-lg object-cover" src={selectedProduct.image} alt={productName} />
+      <img class="w-full h-auto shadow-lg object-cover" src={selectedProduct.image} alt={productName} />
+      <img class="w-full h-auto shadow-lg object-cover" src={selectedProduct.image} alt={productName} />
+      <img class="w-full h-auto shadow-lg object-cover" src={selectedProduct.image} alt={productName} />
     </div>
   
     <!-- Right section -->
     <div class="w-[30%] flex flex-col space-y-6 pl-8">
-      <h1 class="text-5xl font-bold uppercase">{selectedProduct.productName}</h1>
+      <h1 class="text-5xl font-bold uppercase">{productName}</h1>
       <p class="text-lg text-gray-600">SKU: {selectedProduct.sku || "N/A"}</p>
       <p class="text-3xl font-bold text-gray-900">${parseFloat(selectedProduct.price).toLocaleString('en-GB', { minimumFractionDigits: 2 })}</p>
       
@@ -63,9 +67,10 @@ if (!selectedProduct) {
         <p><span class="font-semibold text-gray-800">Case:</span> 40mm, Steel</p>
         <p><span class="font-semibold text-gray-800">Movement:</span> Automatic</p>
       </div>
-      <button class="mt-4 py-3 px-6 bg-blue-600 text-black font-semibold rounded-lg hover:bg-blue-700 transition">
+      <a href={`/inquireform?product=${encodeURIComponent(selectedProduct.productName)}`} class="bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-md px-5 py-3 transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-600">
         Inquire
-      </button>
+      </a>
+      
     </div>
   </section>
 </Layout>
