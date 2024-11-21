@@ -21,18 +21,20 @@ import rolexData from '../../rolex.json';
           {rolexData.productsRolex.map((product, index) => (
             <tr class={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
               <td class="border px-6 py-4">
-                <img src={product.image} alt={product.productName} class="w-20 h-20 object-cover"/>
+                <img 
+                  src={product.image} 
+                  alt={product.productName} 
+                  class="w-20 h-20 object-cover"
+                />
               </td>
               <td class="border px-6 py-4 text-sm text-gray-900">{product.productName}</td>
               <td class="border px-6 py-4 text-sm text-gray-900">{product.year}</td>
-              <td class="border px-6 py-4 text-sm text-gray-900">${product.price}</td>
+              <td class="border px-6 py-4 text-sm text-gray-900">${product.price.toLocaleString()}</td>
               <td class="border px-6 py-4 text-sm text-gray-900">{product.sku}</td>
             </tr>
           ))}
         </tbody>
       </table>
     </div>
-
-    <h2 class="text-4xl font-bold text-center mt-16 mb-12">SUBMARINER</h2>
   </div>
 </section>

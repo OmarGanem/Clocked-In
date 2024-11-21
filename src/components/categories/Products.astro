@@ -1,37 +1,23 @@
 ---
-import { slugify } from '../../utils/slugify';
 import productsData from '../../products.json';
+import { slugify } from '../../utils/slugify';
 
-interface Product {
-  productName: string;
-  category: string;
-  price: string;
-  image: string;
-}
-
-interface Brand {
-  name: string;
-  count: number;
-}
-
-const products: Product[] = productsData.products;
+const products = productsData.products;
 
 // Dynamically generate brands and their counts
-const brands: Brand[] = Array.from(
+const brands = Array.from(
   products.reduce((map, product) => {
     map.set(product.category, (map.get(product.category) || 0) + 1);
     return map;
-  }, new Map<string, number>())
+  }, new Map())
 ).map(([name, count]) => ({ name, count }));
 ---
 
 <div class="container mx-auto px-4 py-8">
   <div class="flex flex-col md:flex-row gap-8">
-    <!-- Sidebar Filter Section -->
-    <aside 
-      id="filter-sidebar" 
-      class="w-full md:w-64 bg-white border border-gray-200 rounded-lg p-6 fixed md:relative inset-y-0 left-0 
-        transform md:translate-x-0 transition-transform duration-300 ease-in-out z-50"
+    <aside
+      id="filter-sidebar"
+      class="w-full md:w-64 bg-white border border-gray-200 rounded-lg p-6 fixed md:relative inset-y-0 left-0 transform md:translate-x-0 transition-transform duration-300 ease-in-out z-50"
     >
       <div class="mb-6">
         <h2 class="text-lg font-bold text-gray-800 mb-4">Brands</h2>
@@ -56,13 +42,13 @@ const brands: Brand[] = Array.from(
       <div class="mb-6">
         <h2 class="text-lg font-bold text-gray-800 mb-4">Search</h2>
         <div class="flex flex-col">
-          <input 
+          <input
             id="search-input"
-            type="text" 
-            placeholder="Search products..." 
+            type="text"
+            placeholder="Search products..."
             class="mb-2 p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-200 text-black"
           />
-          <button 
+          <button
             id="search"
             class="bg-gray-100 text-black px-4 py-2 rounded hover:bg-gray-200 transition-colors"
           >
@@ -72,13 +58,12 @@ const brands: Brand[] = Array.from(
       </div>
     </aside>
 
-    <!-- Main Product Section -->
     <main class="flex-1 ml-0 md:ml-[16rem]">
       <div class="flex items-center justify-between mb-6">
         <h2 class="text-2xl font-bold text-gray-800">
           {products.length} Products
         </h2>
-        <select 
+        <select
           class="p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-200"
         >
           <option>Sort by</option>
@@ -88,28 +73,27 @@ const brands: Brand[] = Array.from(
         </select>
       </div>
 
-      <div 
-        id="products-container" 
+      <div
+        id="products-container"
         class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6"
       >
         {products.map((product) => (
-          <div 
-            class="bg-white rounded-lg shadow-md overflow-hidden group item-card-wrapper flex flex-col justify-between" 
+          <div
+            class="bg-white rounded-lg shadow-md overflow-hidden group item-card-wrapper"
             data-category={product.category}
           >
-            <a 
-              href={`/product/${slugify(product.productName)}`} 
-              class="block relative"
-            >
+            <a href={`/product/${slugify(product.productName)}`} class="block relative">
               <div class="w-full h-64 overflow-hidden">
-                <img 
-                  src={product.image} 
-                  alt={product.productName} 
-                  class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" 
+                <img
+                  src={product.image}
+                  alt={product.productName}
+                  class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                 />
               </div>
               <div class="p-3 text-center">
-                <h3 class="text-sm md:text-base font-semibold text-gray-800 mb-1 truncate product-title">
+                <h3
+                  class="text-sm md:text-base font-semibold text-gray-800 mb-1 truncate product-title"
+                >
                   {product.productName}
                 </h3>
                 <p class="text-gray-600 font-medium">
@@ -124,37 +108,58 @@ const brands: Brand[] = Array.from(
   </div>
 </div>
 
-<script type="module">
+<script>
   document.addEventListener('DOMContentLoaded', () => {
-    const productsContainer = document.getElementById('products-container');
-    const productCards = productsContainer.querySelectorAll('.item-card-wrapper');
+    // Safely fetch elements and add type assertions
+    const productsContainer = document.getElementById('products-container') as HTMLElement | null;
+    if (!productsContainer) {
+      console.error("Products container not found.");
+      return;
+    }
+
+    const productCards = productsContainer.querySelectorAll(
+      '.item-card-wrapper'
+    ) as NodeListOf<HTMLElement>;
 
     // Function to filter products by category
-    function filterProducts(category) {
-      productCards.forEach(card => {
+    function filterProducts(category: string) {
+      productCards.forEach((card) => {
         const productCategory = card.getAttribute('data-category');
         if (category === 'all' || productCategory === category) {
-          card.style.display = 'flex'; 
+          card.style.display = 'flex'; // `style` now works since card is typed as HTMLElement
         } else {
-          card.style.display = 'none'; // Hide non-matching cards
+          card.style.display = 'none';
         }
       });
     }
 
     // Filter by category on button click
-    document.querySelectorAll('.filter-button').forEach(button => {
+    const filterButtons = document.querySelectorAll(
+      '.filter-button'
+    ) as NodeListOf<HTMLButtonElement>;
+    filterButtons.forEach((button) => {
       button.addEventListener('click', () => {
-        const category = button.getAttribute('data-filter');
+        const category = button.getAttribute('data-filter') || 'all'; // Default to 'all' if null
         filterProducts(category);
       });
     });
 
     // Search functionality
-    document.getElementById('search').addEventListener('click', () => {
-      const searchTerm = document.getElementById('search-input').value.toLowerCase();
-      productCards.forEach(card => {
-        const productName = card.querySelector('.product-title').textContent.toLowerCase();
-        if (productName.includes(searchTerm)) {
+    const searchInput = document.getElementById('search-input') as HTMLInputElement | null;
+    const searchButton = document.getElementById('search') as HTMLButtonElement | null;
+
+    if (!searchInput || !searchButton) {
+      console.error("Search input or button not found.");
+      return;
+    }
+
+    searchButton.addEventListener('click', () => {
+      const searchTerm = searchInput.value.toLowerCase();
+      productCards.forEach((card) => {
+        const productName = card.querySelector(
+          '.product-title'
+        )?.textContent?.toLowerCase();
+        if (productName && productName.includes(searchTerm)) {
           card.style.display = 'flex';
         } else {
           card.style.display = 'none';
