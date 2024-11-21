@@ -1,50 +1,70 @@
 <section class="whats-new-section">
-  <div class="flex flex-col gap-24 max-w-5xl w-full">
-    <!-- Left Aligned -->
-    <div class="flex gap-12 flex-col md:flex-row">
-      <div class="flex-1 overflow-hidden">
-        <a href="/product/rolex">
-          <img class="w-[130%] object-cover transition-transform duration-300 hover:scale-110" src="/assets/test.png" alt="Rolex Watch" />
-        </a>
+  <div class="container mx-auto px-4 max-w-6xl">
+    <div class="flex flex-col gap-24">
+      <!-- Left Aligned -->
+      <div class="group flex flex-col md:flex-row items-center gap-12">
+        <div class="image-container md:w-3/5 w-full aspect-[4/4] overflow-hidden">
+          <a href="/pages/rolex.astro" class="block h-full">
+            <img 
+              class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" 
+              src="/assets/test.png" 
+              alt="Rolex Watch" 
+            />
+          </a>
+        </div>
+        <div class="text-content md:w-2/5 w-full text-white">
+          <h3 class="text-3xl md:text-4xl font-bold mb-4 uppercase">ROLEX</h3>
+          <p class="text-base md:text-lg text-gray-300 mb-6 leading-relaxed">
+            Rolex was founded in 1902 by Hans Wilsdorf, a watchmaker who strived to create technically advanced watches with precise movements for athletes, explorers, and other individuals on the move.
+          </p>
+          <a href="/rolex/Rolex.astro" class="inline-block text-lg font-bold text-yellow-500 border-b border-yellow-500 pb-1 transition-colors duration-300 hover:text-white hover:border-white">
+            Shop Rolex
+          </a>
+        </div>
       </div>
-      <div class="flex-2 max-w-[70%] text-white py-2 px-5 flex flex-col justify-center mt-[-8%]">
-        <h3 class="text-4xl font-bold mb-2 uppercase">ROLEX</h3>
-        <p class="text-lg text-gray-300 mb-5 leading-relaxed max-w-xl">
-          Rolex was founded in 1902 by Hans Wilsdorf, a watchmaker who strived to create technically advanced watches with precise movements for athletes, explorers, and other individuals on the move.
-        </p>
-        <a href="/rolex/Rolex.astro" class="inline-block text-lg font-bold text-yellow-500 border-b border-yellow-500 pb-1 transition-colors duration-300 hover:text-white hover:border-white">Shop Rolex</a>
-      </div>
-    </div>
 
-    <!-- Right Aligned -->
-    <div class="flex gap-12 flex-col md:flex-row-reverse">
-      <div class="flex-1 overflow-hidden">
-        <a href="/product/richard-mille">
-          <img class="w-[130%] object-cover transition-transform duration-300 hover:scale-110" src="/assets/test.png" alt="Richard Mille Watch" />
-        </a>
+      <!-- Right Aligned -->
+      <div class="group flex flex-col md:flex-row-reverse items-center gap-12">
+        <div class="image-container md:w-3/5 w-full aspect-[4/4] overflow-hidden">
+          <a href="/product/richard-mille" class="block h-full">
+            <img 
+              class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" 
+              src="/assets/test.png" 
+              alt="Richard Mille Watch" 
+            />
+          </a>
+        </div>
+        <div class="text-content md:w-2/5 w-full text-white text-right md:text-left">
+          <h3 class="text-3xl md:text-4xl font-bold mb-4 uppercase">RICHARD MILLE</h3>
+          <p class="text-base md:text-lg text-gray-300 mb-6 leading-relaxed">
+            Made with shock-resistant and lightweight materials found in race cars and durable materials such as NASA-grade titanium. No other watch is quite like a Richard Mille.
+          </p>
+          <a href="/product/richard-mille" class="inline-block text-lg font-bold text-yellow-500 border-b border-yellow-500 pb-1 transition-colors duration-300 hover:text-white hover:border-white">
+            Shop Richard Mille
+          </a>
+        </div>
       </div>
-      <div class="flex-2 max-w-[70%] text-white py-2 px-5 flex flex-col justify-center mt-[-8%]">
-        <h3 class="text-4xl font-bold mb-2 uppercase">RICHARD MILLE</h3>
-        <p class="text-lg text-gray-300 mb-5 leading-relaxed max-w-xl">
-          Made with shock-resistant and lightweight materials found in race cars and durable materials such as NASA-grade titanium. No other watch is quite like a Richard Mille.
-        </p>
-        <a href="/product/richard-mille" class="inline-block text-lg font-bold text-yellow-500 border-b border-yellow-500 pb-1 transition-colors duration-300 hover:text-white hover:border-white">Shop Richard Mille</a>
-      </div>
-    </div>
 
-    <!-- Left Aligned -->
-    <div class="flex gap-12 flex-col md:flex-row">
-      <div class="flex-1 overflow-hidden">
-        <a href="/product/panerai">
-          <img class="w-[130%] object-cover transition-transform duration-300 hover:scale-110" src="/assets/test.png" alt="Panerai Watch" />
-        </a>
-      </div>
-      <div class="flex-2 max-w-[70%] text-white py-2 px-5 flex flex-col justify-center mt-[-8%]">
-        <h3 class="text-4xl font-bold mb-2 uppercase">PANERAI SUBMERSIBLE</h3>
-        <p class="text-lg text-gray-300 mb-5 leading-relaxed max-w-xl">
-          This is a unique timepiece known for its elegance and functionality, offering a timeless design for enthusiasts who value craftsmanship.
-        </p>
-        <a href="/product/panerai" class="inline-block text-lg font-bold text-yellow-500 border-b border-yellow-500 pb-1 transition-colors duration-300 hover:text-white hover:border-white">Shop Panerai</a>
+      <!-- Left Aligned -->
+      <div class="group flex flex-col md:flex-row items-center gap-12">
+        <div class="image-container md:w-3/5 w-full aspect-[4/4] overflow-hidden">
+          <a href="/product/panerai" class="block h-full">
+            <img 
+              class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" 
+              src="/assets/test.png" 
+              alt="Panerai Watch" 
+            />
+          </a>
+        </div>
+        <div class="text-content md:w-2/5 w-full text-white">
+          <h3 class="text-3xl md:text-4xl font-bold mb-4 uppercase">PANERAI SUBMERSIBLE</h3>
+          <p class="text-base md:text-lg text-gray-300 mb-6 leading-relaxed">
+            This is a unique timepiece known for its elegance and functionality, offering a timeless design for enthusiasts who value craftsmanship.
+          </p>
+          <a href="/product/panerai" class="inline-block text-lg font-bold text-yellow-500 border-b border-yellow-500 pb-1 transition-colors duration-300 hover:text-white hover:border-white">
+            Shop Panerai
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -55,21 +75,5 @@
   color: #fff;
   padding: 100px 0;
   background-color: #000;
-  display: flex;
-  justify-content: center;
-}
-
-.whats-new-section h3 {
-  color: #fff;
-}
-
-.whats-new-section a {
-  color: #f1c40f;
-  border-bottom: 1px solid #f1c40f;
-}
-
-.whats-new-section a:hover {
-  color: #fff;
-  border-color: #fff;
 }
 </style>
