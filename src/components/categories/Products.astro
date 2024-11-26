@@ -13,158 +13,149 @@ const brands = Array.from(
 ).map(([name, count]) => ({ name, count }));
 ---
 
-<div class="container mx-auto px-4 py-8">
-  <div class="flex flex-col md:flex-row gap-8">
-    <aside
-      id="filter-sidebar"
-      class="w-full md:w-64 bg-white border border-gray-200 rounded-lg p-6 fixed md:relative inset-y-0 left-0 transform md:translate-x-0 transition-transform duration-300 ease-in-out z-50"
-    >
-      <div class="mb-6">
-        <h2 class="text-lg font-bold text-gray-800 mb-4">Brands</h2>
-        <div class="space-y-2">
-          <button
-            class="filter-button w-full text-left text-gray-700 hover:bg-gray-100 p-2 rounded cursor-pointer"
-            data-filter="all"
-          >
-            All Brands
-          </button>
-          {brands.map((brand) => (
+<div class="bg-gray-900 min-h-screen">
+  <div class="container mx-auto px-0 md:px-4 py-12"> <!-- Removed padding on smaller screens -->
+    <div class="flex flex-col md:flex-row gap-8">
+      <!-- Sidebar -->
+      <aside class="w-full md:w-72 bg-gray-800 rounded-lg p-8 md:ml-0"> <!-- Align sidebar to the left -->
+        <div class="mb-8">
+          <h2 class="text-lg font-semibold text-gray-200 mb-6 tracking-wide">Collections</h2>
+          <div class="space-y-3">
             <button
-              class="filter-button w-full text-left text-gray-700 hover:bg-gray-100 p-2 rounded cursor-pointer"
-              data-filter={brand.name}
+              class="filter-button w-full text-left px-4 py-2 rounded transition-colors text-gray-400 hover:text-white hover:bg-gray-700"
+              data-filter="all"
             >
-              {brand.name} <span class="text-gray-500 text-sm">({brand.count})</span>
+              All Collections
             </button>
+            {brands.map((brand) => (
+              <button
+                class="filter-button w-full text-left px-4 py-2 rounded transition-colors text-gray-400 hover:text-white hover:bg-gray-700"
+                data-filter={brand.name}
+              >
+                {brand.name}
+                <span class="text-gray-500 text-sm ml-2">({brand.count})</span>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div class="mb-8">
+          <h2 class="text-lg font-semibold text-gray-200 mb-6 tracking-wide">Search</h2>
+          <div class="space-y-4">
+            <input
+              id="search-input"
+              type="text"
+              placeholder="Search timepieces..."
+              class="w-full bg-gray-700 text-white px-4 py-2 rounded border border-gray-600 focus:ring-2 focus:ring-gray-500 focus:border-transparent placeholder-gray-400"
+            />
+            <button
+              id="search"
+              class="w-full bg-gray-700 text-gray-200 px-4 py-2 rounded hover:bg-gray-600 transition-colors"
+            >
+              Search
+            </button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="flex-1">
+        <div
+          id="products-container"
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
+          {products.map((product) => (
+            <div
+              class="bg-gray-800 rounded-lg overflow-hidden group item-card-wrapper"
+              data-category={product.category}
+            >
+              <a href={`/product/${slugify(product.productName)}`} class="block">
+                <div class="relative aspect-square overflow-hidden">
+                  <img
+                    src={product.image}
+                    alt={product.productName}
+                    class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <!-- Overlay gradient -->
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </div>
+                
+                <div class="p-6 text-center">
+                  <h3 class="text-lg font-semibold text-gray-200 mb-2 tracking-wider product-title">
+                    {product.productName}
+                  </h3>
+                  <p class="text-gray-400 font-medium tracking-widest">
+                    £{parseFloat(product.price).toLocaleString('en-GB', { 
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2 
+                    })}
+                  </p>
+                </div>
+              </a>
+            </div>
           ))}
         </div>
-      </div>
-
-      <div class="mb-6">
-        <h2 class="text-lg font-bold text-gray-800 mb-4">Search</h2>
-        <div class="flex flex-col">
-          <input
-            id="search-input"
-            type="text"
-            placeholder="Search products..."
-            class="mb-2 p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-200 text-black"
-          />
-          <button
-            id="search"
-            class="bg-gray-100 text-black px-4 py-2 rounded hover:bg-gray-200 transition-colors"
-          >
-            Search
-          </button>
-        </div>
-      </div>
-    </aside>
-
-    <main class="flex-1 ml-0 md:ml-[16rem]">
-      <div class="flex items-center justify-between mb-6">
-        <h2 class="text-2xl font-bold text-gray-800">
-          {products.length} Products
-        </h2>
-        <select
-          class="p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-200"
-        >
-          <option>Sort by</option>
-          <option value="price-asc">Price: Low to High</option>
-          <option value="price-desc">Price: High to Low</option>
-          <option value="newest">Newest Arrivals</option>
-        </select>
-      </div>
-
-      <div
-        id="products-container"
-        class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6"
-      >
-        {products.map((product) => (
-          <div
-            class="bg-white rounded-lg shadow-md overflow-hidden group item-card-wrapper"
-            data-category={product.category}
-          >
-            <a href={`/product/${slugify(product.productName)}`} class="block relative">
-              <div class="w-full h-64 overflow-hidden">
-                <img
-                  src={product.image}
-                  alt={product.productName}
-                  class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                />
-              </div>
-              <div class="p-3 text-center">
-                <h3
-                  class="text-sm md:text-base font-semibold text-gray-800 mb-1 truncate product-title"
-                >
-                  {product.productName}
-                </h3>
-                <p class="text-gray-600 font-medium">
-                  ${parseFloat(product.price).toLocaleString('en-GB', { minimumFractionDigits: 2 })}
-                </p>
-              </div>
-            </a>
-          </div>
-        ))}
-      </div>
-    </main>
+      </main>
+    </div>
   </div>
 </div>
 
+
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    // Safely fetch elements and add type assertions
-    const productsContainer = document.getElementById('products-container') as HTMLElement | null;
-    if (!productsContainer) {
-      console.error("Products container not found.");
-      return;
-    }
+  // Client-side filtering functionality
+  const filterButtons = document.querySelectorAll('.filter-button') as NodeListOf<HTMLButtonElement>;
+  const productCards = document.querySelectorAll('.item-card-wrapper') as NodeListOf<HTMLElement>;
+  const searchInput = document.getElementById('search-input') as HTMLInputElement | null;
+  const searchButton = document.getElementById('search') as HTMLButtonElement | null;
 
-    const productCards = productsContainer.querySelectorAll(
-      '.item-card-wrapper'
-    ) as NodeListOf<HTMLElement>;
-
-    // Function to filter products by category
-    function filterProducts(category: string) {
-      productCards.forEach((card) => {
-        const productCategory = card.getAttribute('data-category');
-        if (category === 'all' || productCategory === category) {
-          card.style.display = 'flex'; // `style` now works since card is typed as HTMLElement
-        } else {
-          card.style.display = 'none';
-        }
-      });
-    }
-
-    // Filter by category on button click
-    const filterButtons = document.querySelectorAll(
-      '.filter-button'
-    ) as NodeListOf<HTMLButtonElement>;
+  if (filterButtons && productCards) {
+    // Filter functionality
     filterButtons.forEach((button) => {
       button.addEventListener('click', () => {
-        const category = button.getAttribute('data-filter') || 'all'; // Default to 'all' if null
-        filterProducts(category);
+        const filter = button.getAttribute('data-filter');
+
+        // Update active button styles
+        filterButtons.forEach((btn) => {
+          btn.classList.remove('bg-gray-700', 'text-white');
+          btn.classList.add('text-gray-400');
+        });
+        button.classList.add('bg-gray-700', 'text-white');
+        button.classList.remove('text-gray-400');
+
+        // Filter products
+        productCards.forEach((card) => {
+          const productCategory = card.getAttribute('data-category');
+          if (filter === 'all' || productCategory === filter) {
+            card.style.display = 'block'; // Ensure 'card' is treated as HTMLElement
+          } else {
+            card.style.display = 'none';
+          }
+        });
       });
     });
+  }
 
+  if (searchInput && searchButton) {
     // Search functionality
-    const searchInput = document.getElementById('search-input') as HTMLInputElement | null;
-    const searchButton = document.getElementById('search') as HTMLButtonElement | null;
-
-    if (!searchInput || !searchButton) {
-      console.error("Search input or button not found.");
-      return;
-    }
-
-    searchButton.addEventListener('click', () => {
+    const handleSearch = () => {
       const searchTerm = searchInput.value.toLowerCase();
+
       productCards.forEach((card) => {
-        const productName = card.querySelector(
-          '.product-title'
-        )?.textContent?.toLowerCase();
-        if (productName && productName.includes(searchTerm)) {
-          card.style.display = 'flex';
+        const title = card.querySelector('.product-title')?.textContent?.toLowerCase() || '';
+        if (title.includes(searchTerm)) {
+          card.style.display = 'block';
         } else {
           card.style.display = 'none';
         }
       });
+    };
+
+    searchButton.addEventListener('click', handleSearch);
+    searchInput.addEventListener('keyup', (e) => {
+      if (e.key === 'Enter') handleSearch();
     });
-  });
+  } else {
+    console.error('Search input or button not found.');
+  }
 </script>
+

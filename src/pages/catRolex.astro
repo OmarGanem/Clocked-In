@@ -1,0 +1,71 @@
+---
+import productsData from "../products.json";
+import { slugify } from "../utils/slugify";
+import Layout from "../layouts/Layout.astro";
+
+// Filter only Rolex products
+const products = productsData.products.filter(
+  (product) => product.category.toLowerCase() === "rolex".toLowerCase()
+);
+
+// Function to format price
+const formatPrice = (price: string) => {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD'
+  }).format(Number(price));
+};
+---
+
+<Layout title="Rolex Products" description="Browse our collection of Rolex products">
+  <div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-8 text-center">Rolex Collection</h1>
+    <div
+      id="products-container"
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+    >
+      {products.map((product) => (
+        <div class="bg-white rounded-lg shadow-md overflow-hidden group hover:shadow-lg transition-shadow duration-300">
+          <a
+            href={`/product/${slugify(product.productName)}`}
+            class="block relative"
+          >
+            <div class="w-full h-64 overflow-hidden">
+              <img
+                src={product.image}
+                alt={product.productName}
+                class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+              />
+            </div>
+            <div class="p-4">
+              {/* Product Name */}
+              <h2 class="text-xl font-semibold mb-2 text-gray-800 line-clamp-2">
+                {product.productName}
+              </h2>
+              
+              {/* Price */}
+              <p class="text-lg font-bold text-gray-900 mb-2">
+                {formatPrice(product.price)}
+              </p>
+              
+              {/* SKU */}
+              <p class="text-sm text-gray-600 mb-1">
+                SKU: {product.sku}
+              </p>
+              
+              {/* Year */}
+              <p class="text-sm text-gray-600 mb-1">
+                Year: {product.year}
+              </p>
+              
+              {/* Description */}
+              <p class="text-sm text-gray-600 mt-2 line-clamp-2">
+                {product.description}
+              </p>
+            </div>
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+</Layout>
